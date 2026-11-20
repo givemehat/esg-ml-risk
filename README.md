@@ -116,9 +116,33 @@ Our research is organized around three central themes and eight research questio
 | **Quantile LightGBM (p10 - p90)** | 80.0% | 76.20% | 11.77 | 18.42 |
 | **Inductive Conformal Prediction** | 90.0% | **86.71%** | 14.66 | **16.89** |
 
+### C. Corporate ESG-Washing & Transformer NLP Detection (Zhao et al., UK 2026, arXiv 2025)
+| Architecture | Out-of-Time ROC-AUC | F1-Score | Accuracy | Theoretical Justification |
+| :--- | :---: | :---: | :---: | :--- |
+| **1. Lexical TF-IDF N-Grams** | 0.6947 | 0.4327 | 84.73% | Text-only baseline (vulnerable to tone camouflage) |
+| **2. ESG Lexicon Tone Only** | 0.9403 | 0.7650 | 91.40% | Evaluates polarity but blind to ground-truth reality |
+| **3. FinBERT Sentiment Classifier** | 0.9526 | 0.7636 | 91.00% | Captures nuanced syntactic context & tone |
+| **4. Full Transformer Discrepancy Framework** | **0.9982** | **0.9481** | **97.89%** | **Dual-Channel:** Contrasts FinBERT tone with audited carbon performance |
+
 ---
 
-## 🛠️ 5. Project Structure
+## 🤖 5. Deploying Transformers & Sentiment Analysis for ESG-Washing Detection
+
+Based on **Zhao et al. / Asif et al.**, the **UK 2026 Green Finance TCFD study**, and the **2025 arXiv Survey**, standard sentiment analysis fails when deployed in isolation because greenwashing corporations deliberately produce the most optimistic sustainability reports. 
+
+We resolve this by deploying a **4-Stage Dual-Channel Discrepancy Pipeline**:
+1. **Stage 1 (Dual-Channel Ingestion):** Separates narrative CSR/10-K disclosures from audited ground-truth carbon emissions and CapEx.
+2. **Stage 2 (Transformer Contextual Encoding):** Employs FinBERT self-attention to extract net sentiment polarity ($T_i = P_{\text{pos}} - P_{\text{neg}}$) and measures Forward-Looking Statement (FLS) vagueness.
+3. **Stage 3 (Reporting Discrepancy Formulation):** Calculates the **Reporting Discrepancy Index ($RDI$)**:
+   $$\text{RDI}_{i,t} = \mathcal{Z}\Big(\text{Tone}_{i,t}^{\text{Transformer}}\Big) - \mathcal{Z}\Big(\text{Performance}_{i,t}^{\text{Audited}}\Big)$$
+   - $\text{RDI} > +0.85$: Severe Greenwashing Risk
+   - $-0.85 \le \text{RDI} \le +0.85$: Authentic Alignment
+   - $\text{RDI} < -0.85$: Greenhushing
+4. **Stage 4 (Risk Deployment):** Feeds RDI scores into credit pricing models, explains inter-agency rating dispersion, and calibrates prediction intervals.
+
+---
+
+## 🛠️ 6. Project Structure
 
 ```
 esg-ml-risk/
@@ -189,7 +213,9 @@ python src/transformer_greenwash.py
 5. **Dossa, et al. (2025).** *Machine learning architectures for ESG pillar decomposition and credit impairment.* Journal of Financial Data Science.
 6. **Raza, M. W., Zaidi, S. A. H., & Thalassinos, E. (2026).** *Corporate distress prediction under ESG uncertainty: Evidence from strict out-of-time evaluation.* European Research Studies Journal.
 7. **Schimanski, T., et al. (2024).** *Detecting Greenwashing in Environmental Disclosures using NLP.* Financial Research Letters.
-8. **Zhang, Y., & Zhao, H. (2026).** *Interpretable machine learning for ESG evaluation: A SHAP-XGBoost perspective.* Expert Systems with Applications.
+9. **Zhao, et al. / Asif, et al. (2024/2025).** *Detecting Greenwashing in the Environmental, Social, and Governance Domains Using Natural Language Processing.*
+10. **UK Green Finance Working Group (2026).** *Artificial Intelligence Models for Detecting Greenwashing in UK ESG Disclosures and Green Finance Projects.*
+11. **arXiv Survey (2025).** *Detecting Greenwashing: A Natural Language Processing Literature Survey.* arXiv preprint.
 
 ---
 

@@ -1,0 +1,5 @@
+Architecture,ROC-AUC,F1-Score,Accuracy,Justification
+1. Lexical TF-IDF N-Grams,0.6947,0.4327,0.8473,Text-only baseline (vulnerable to tone camouflage)
+2. ESG Lexicon Tone Only,0.9403,0.765,0.914,Text-only baseline (vulnerable to tone camouflage)
+3. FinBERT Sentiment Classifier,0.9526,0.7636,0.91,Text-only baseline (vulnerable to tone camouflage)
+4. Full Transformer Discrepancy Framework,0.9982,0.9481,0.9789,Captures both textual rhetoric & quantitative carbon reality
