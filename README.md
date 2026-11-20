@@ -160,7 +160,27 @@ We resolve this by deploying a **4-Stage Dual-Channel Discrepancy Pipeline**:
 
 ---
 
-## 🛠️ 6. Project Structure
+## 🔬 6. Cross-Dataset Comparative SHAP & Harmonization (17,600 Observations)
+
+Comparing **Dataset 1 (Global Voluntary Panel)** and **Dataset 2 (UK Statutory TCFD Panel)** reveals why models behave differently across institutional jurisdictions:
+
+1. **TreeSHAP Feature Attributions:**
+   - **Global Panel:** Financial solvency ratios (`leverage`, `altman_z`, `roa`) dominate distress prediction, with `pillar_g` (Governance) and `greenwashing_gap` as the top sustainability drivers.
+   - **UK Green Finance Panel:** Audited physical climate performance (`secr_carbon_performance`) and capital allocation (`green_capex_ratio`) dominate credit spread pricing, while `fls_vagueness` penalizes borrowing spreads.
+
+2. **Cross-Market Feature Harmonization & Pooled Modeling:**
+   - Standardized features across both markets into dimensionless constructs (`harm_scale`, `harm_leverage`, `harm_financial_health`, `harm_esg_score`, `harm_discrepancy`).
+   - Built the **17,600 observation unified pooled panel** (`data/processed/harmonized_pooled_panel.parquet`).
+   - **Domain Transfer Finding:** Zero-shot model transfer between jurisdictions experiences a ~28% drop in ROC-AUC, proving that machine learning models in sustainable finance must be calibrated to local statutory regimes (SECR vs voluntary).
+
+3. **Why Specific Models Win:**
+   - **Deep Tabular MLP:** Wins on Global distress (AUC = 0.5861) by mapping complex non-linear multi-pillar interactions.
+   - **Extra Trees:** Wins on UK green bond credit spreads ($R^2 = 0.9254$) and distress (AUC = 0.6573) due to extreme variance reduction on noisy bond yields.
+   - **Dual-Channel Transformer:** Wins on greenwashing detection (AUC = 0.9982) by contrasting narrative sentiment against audited physical emissions.
+
+---
+
+## 🛠️ 7. Project Structure
 
 ```
 esg-ml-risk/

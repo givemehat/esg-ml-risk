@@ -1,0 +1,17 @@
+{
+    "Train D1 (Global)": {
+        "Test D1 (Global)": 0.5474,
+        "Test D2 (UK)": 0.3927,
+        "Test Pooled": 0.4836
+    },
+    "Train D2 (UK)": {
+        "Test D1 (Global)": 0.4929,
+        "Test D2 (UK)": 0.5156,
+        "Test Pooled": 0.5033
+    },
+    "Train Pooled (D1+D2)": {
+        "Test D1 (Global)": 0.498,
+        "Test D2 (UK)": 0.4844,
+        "Test Pooled": 0.493
+    }
+}
