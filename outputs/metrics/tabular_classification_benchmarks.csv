@@ -1,0 +1,6 @@
+Model,Target,ROC-AUC,PR-AUC,Brier Score,F1-Score
+Logistic Regression,financial_distress_t1,0.501,0.0047,0.0047,0.0
+Random Forest,financial_distress_t1,0.5467,0.0066,0.0694,0.0
+Extra Trees,financial_distress_t1,0.5418,0.0053,0.14,0.0
+XGBoost,financial_distress_t1,0.4872,0.0047,0.005,0.0
+LightGBM,financial_distress_t1,0.5163,0.0053,0.0493,0.0139

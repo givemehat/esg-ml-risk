@@ -1,0 +1,6 @@
+Specification,Num Features,ROC-AUC,Delta AUC vs M1,PR-AUC,Brier Score
+M1: Financials Only,9,0.6073,+0.0000,0.0068,0.0541
+M2: Financials + ESG Level,10,0.5784,-0.0289,0.0062,0.0492
+"M3: Financials + Individual Pillars (E, S, G)",12,0.5981,-0.0092,0.0079,0.041
+M4: Financials + ESG + Disagreement (RQ2),11,0.5163,-0.0910,0.0053,0.0493
+M5: Full Model (+ Greenwashing Gap) (RQ5),13,0.5289,-0.0783,0.0064,0.0501

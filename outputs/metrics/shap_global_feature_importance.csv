@@ -1,0 +1,13 @@
+feature,mean_abs_shap
+pillar_g,4.5972276
+pillar_e,3.9085963
+pillar_s,2.5116494
+tobins_q,0.16636784
+volatility,0.13546231
+roa,0.0900776
+current_ratio,0.087279856
+altman_z,0.0870505
+operating_margin,0.0805963
+log_assets,0.06635587
+leverage,0.06311265
+debt_to_equity,0.023052402

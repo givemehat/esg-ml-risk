@@ -1,0 +1,12 @@
+{
+    "Quantile_Regression_80pct": {
+        "PICP (Coverage)": 0.762,
+        "MPIW (Mean Width)": 11.7675,
+        "Winkler Score": 17.6029
+    },
+    "Conformal_Prediction_90pct": {
+        "PICP (Coverage)": 0.8671,
+        "MPIW (Mean Width)": 14.6611,
+        "Winkler Score": 20.3326
+    }
+}

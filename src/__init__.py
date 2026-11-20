@@ -1,0 +1,6 @@
+"""
+ESG Machine Learning & Financial Risk Research Package
+Sapienza University of Rome & Gautam Buddha University Collaboration
+Authors: Rajnish Singh, Medhavie Gupta, Katyayani Jaiswal
+Academic Advisor: Prof. Valentina Lagasio
+"""

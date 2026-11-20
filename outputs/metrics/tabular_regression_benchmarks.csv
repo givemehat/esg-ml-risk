@@ -1,0 +1,6 @@
+Model,Target,RMSE,MAE,R2
+Ridge Baseline,consensus_esg,4.791,3.8232,0.8365
+Random Forest,consensus_esg,4.8848,3.9093,0.83
+Extra Trees,consensus_esg,4.8193,3.8477,0.8346
+XGBoost,consensus_esg,4.8668,3.8828,0.8313
+LightGBM,consensus_esg,4.8616,3.8737,0.8316

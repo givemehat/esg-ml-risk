@@ -1,0 +1,12 @@
+{
+    "TF_IDF_Baseline": {
+        "ROC-AUC": 0.9397,
+        "F1-Score": 0.8089,
+        "Accuracy": 0.9429
+    },
+    "Transformer_Self_Attention": {
+        "ROC-AUC": 0.9407,
+        "F1-Score": 0.8089,
+        "Accuracy": 0.9429
+    }
+}
