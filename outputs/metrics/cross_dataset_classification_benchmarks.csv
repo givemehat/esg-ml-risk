@@ -1,0 +1,15 @@
+Dataset,Model,Task,ROC-AUC,PR-AUC
+Dataset 1 (Global Panel),M02: Logistic Regression,Financial Distress Out-of-Time,0.5517,0.0057
+Dataset 1 (Global Panel),M03: Random Forest Classifier,Financial Distress Out-of-Time,0.5315,0.0056
+Dataset 1 (Global Panel),M04: Extra Trees Classifier,Financial Distress Out-of-Time,0.5325,0.0053
+Dataset 1 (Global Panel),M05: Gradient Boosting Classifier,Financial Distress Out-of-Time,0.489,0.0046
+Dataset 1 (Global Panel),M06: XGBoost Classifier,Financial Distress Out-of-Time,0.476,0.0045
+Dataset 1 (Global Panel),M07: LightGBM Classifier,Financial Distress Out-of-Time,0.5432,0.0058
+Dataset 1 (Global Panel),M08: Deep Tabular MLP Classifier,Financial Distress Out-of-Time,0.5861,0.0068
+Dataset 2 (UK Green Finance),M02: Logistic Regression,Credit Distress Out-of-Time,0.5742,0.0074
+Dataset 2 (UK Green Finance),M03: Random Forest Classifier,Credit Distress Out-of-Time,0.5833,0.0085
+Dataset 2 (UK Green Finance),M04: Extra Trees Classifier,Credit Distress Out-of-Time,0.6573,0.0098
+Dataset 2 (UK Green Finance),M05: Gradient Boosting Classifier,Credit Distress Out-of-Time,0.5903,0.0088
+Dataset 2 (UK Green Finance),M06: XGBoost Classifier,Credit Distress Out-of-Time,0.62,0.0093
+Dataset 2 (UK Green Finance),M07: LightGBM Classifier,Credit Distress Out-of-Time,0.5611,0.0084
+Dataset 2 (UK Green Finance),M08: Deep Tabular MLP Classifier,Credit Distress Out-of-Time,0.4803,0.0058

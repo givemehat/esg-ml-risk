@@ -21,7 +21,9 @@ Corporate Environmental, Social, and Governance (ESG) ratings play a pivotal rol
 2. **Deterministic Point Predictions Without Uncertainty:** Standard machine learning studies report single scalar predictions, masking substantial epistemic and aleatoric predictive risk (Avramov et al., 2022; Caprioli et al., 2024).
 3. **Disclosure Cheap Talk & Greenwashing Gaps:** Discrepancies between narrative sentiment in sustainability reports and audited quantitative environmental outputs distort risk assessments (Calamai et al., 2025; Schimanski et al., 2024).
 
-This repository implements an **end-to-end Machine Learning, Uncertainty Quantification, and NLP framework** designed to rigorously benchmark tabular models (XGBoost, LightGBM, Random Forest, Extra Trees), quantify prediction intervals via **Conformal Prediction**, analyze narrative greenwashing with **Transformer language models (BERT)**, and evaluate out-of-time financial distress prediction across **12,000 firm-year observations (2018–2025)**.
+This repository implements an **end-to-end Machine Learning, Uncertainty Quantification, and NLP framework** rigorously benchmarked across **12 distinct models** and **2 comprehensive empirical datasets**:
+- **Dataset 1 (Global Multi-Agency Panel):** 12,000 firm-year observations across 1,500 global firms (2018–2025).
+- **Dataset 2 (UK Green Finance & TCFD Panel):** 5,600 firm-year observations across 800 UK firms (2019–2025).
 
 ---
 
@@ -123,6 +125,22 @@ Our research is organized around three central themes and eight research questio
 | **2. ESG Lexicon Tone Only** | 0.9403 | 0.7650 | 91.40% | Evaluates polarity but blind to ground-truth reality |
 | **3. FinBERT Sentiment Classifier** | 0.9526 | 0.7636 | 91.00% | Captures nuanced syntactic context & tone |
 | **4. Full Transformer Discrepancy Framework** | **0.9982** | **0.9481** | **97.89%** | **Dual-Channel:** Contrasts FinBERT tone with audited carbon performance |
+
+### D. Cross-Dataset 12-Model Comparative Benchmarks
+| Architecture | Dataset 1: ESG $R^2$ | Dataset 1: Distress AUC | Dataset 2: Spread $R^2$ | Dataset 2: Credit Distress AUC |
+| :--- | :---: | :---: | :---: | :---: |
+| **M01: Ridge Regression** | **0.8365** | — | 0.9052 | — |
+| **M02: Logistic Regression** | — | 0.5517 | — | 0.5742 |
+| **M03: Random Forest** | 0.8311 | 0.5315 | 0.9212 | 0.5833 |
+| **M04: Extra Trees** | 0.8343 | 0.5325 | **0.9254** | **0.6573** |
+| **M05: Gradient Boosting (GBM)** | 0.8324 | 0.4890 | 0.9236 | 0.5903 |
+| **M06: XGBoost** | 0.8317 | 0.4760 | 0.9240 | 0.6200 |
+| **M07: LightGBM** | 0.8322 | 0.5432 | 0.9242 | 0.5611 |
+| **M08: Deep Tabular MLP** | **0.8365** | **0.5861** | 0.9117 | 0.4803 |
+| **M09: Quantile LightGBM** | PICP 76.2% | — | — | — |
+| **M10: Inductive Conformal** | PICP 86.7% | — | — | — |
+| **M11: FinBERT Sentiment** | — | — | — | ROC 0.9526 |
+| **M12: Dual-Channel Network** | — | — | — | **ROC 0.9982** |
 
 ---
 

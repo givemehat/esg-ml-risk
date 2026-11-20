@@ -1,0 +1,15 @@
+Dataset,Model,Task,RMSE,MAE,R2
+Dataset 1 (Global Panel),M01: Ridge Regression,ESG Score Regression,4.791,3.8232,0.8365
+Dataset 1 (Global Panel),M03: Random Forest,ESG Score Regression,4.869,3.8911,0.8311
+Dataset 1 (Global Panel),M04: Extra Trees,ESG Score Regression,4.8237,3.8517,0.8343
+Dataset 1 (Global Panel),M05: Gradient Boosting (GBM),ESG Score Regression,4.8509,3.8704,0.8324
+Dataset 1 (Global Panel),M06: XGBoost Regressor,ESG Score Regression,4.8614,3.8802,0.8317
+Dataset 1 (Global Panel),M07: LightGBM Regressor,ESG Score Regression,4.854,3.873,0.8322
+Dataset 1 (Global Panel),M08: Deep Tabular MLP,ESG Score Regression,4.791,3.8224,0.8365
+Dataset 2 (UK Green Finance),M01: Ridge Regression,Green Bond Spread (bps),13.78,10.63,0.9052
+Dataset 2 (UK Green Finance),M03: Random Forest,Green Bond Spread (bps),12.57,9.81,0.9212
+Dataset 2 (UK Green Finance),M04: Extra Trees,Green Bond Spread (bps),12.23,9.59,0.9254
+Dataset 2 (UK Green Finance),M05: Gradient Boosting (GBM),Green Bond Spread (bps),12.38,9.65,0.9236
+Dataset 2 (UK Green Finance),M06: XGBoost Regressor,Green Bond Spread (bps),12.34,9.6,0.924
+Dataset 2 (UK Green Finance),M07: LightGBM Regressor,Green Bond Spread (bps),12.32,9.59,0.9242
+Dataset 2 (UK Green Finance),M08: Deep Tabular MLP,Green Bond Spread (bps),13.3,10.58,0.9117
