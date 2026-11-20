@@ -89,6 +89,28 @@ To ensure rigorous validation across differing institutional regimes, the resear
 - **Dataset 1 (Global Voluntary Panel):** Reflects the prevailing international environment where ESG reporting is largely unstandardized and voluntary. It enables study of rating agency disagreement, narrative disclosure sentiment, and classical corporate bankruptcy prediction.
 - **Dataset 2 (UK Statutory Climate Panel):** Reflects the frontier of statutory climate regulation under the UK Companies Act (Streamlined Energy and Carbon Reporting - SECR) and mandatory TCFD reporting. This dataset enables direct examination of how audited carbon intensity and green capital allocation translate into bond market pricing (credit spreads).
 
+### Data Sources, Provenance, and Access Links
+
+To ensure full transparency and scientific replicability, the empirical datasets are compiled from established institutional, financial, and regulatory repositories:
+
+1. **Dataset 1: Global Multi-Agency Panel (12,000 Firm-Years)**
+   - **Financial Fundamentals and Balance Sheet Ratios:** Sourced from the Bureau van Dijk (BvD) Orbis Database ([Orbis Database Portal](https://www.bvdinfo.com/en-gb/our-products/data/international/orbis)) and Wharton Research Data Services ([WRDS Compustat Financials](https://wrds-www.wharton.upenn.edu/)). Key metrics include total assets, financial leverage, return on assets (ROA), current ratio, and Altman Z-score.
+   - **Multi-Agency ESG Divergence Proxies:** Sourced and reconciled from three major rating providers: Refinitiv ESG ([LSEG Data and Analytics](https://www.lseg.com/en/data-analytics)), MSCI ESG Research ([MSCI ESG Ratings](https://www.msci.com/our-solutions/esg-investing)), and Sustainalytics ESG Risk Ratings ([Morningstar Sustainalytics](https://www.sustainalytics.com/esg-data)), along with the open replication repository of the MIT Aggregate Confusion Project ([MIT Aggregate Confusion Project](https://aggregateconfusion.mit.edu/)).
+   - **Corporate Disclosures and CSR Text:** Sourced from corporate 10-K filings and annual CSR reports via the SEC EDGAR System ([SEC EDGAR Company Search](https://www.sec.gov/edgar/searchedgar/companysearch)) and open financial corpora on Hugging Face ([Hugging Face ClimateBERT](https://huggingface.co/datasets/climatebert) and [Financial PhraseBank](https://huggingface.co/datasets/financial_phrasebank)).
+   - **Open Benchmark Reference:** Kaggle ESG Scores and Financial Performance Panels ([Kaggle ESG Dataset](https://www.kaggle.com/datasets/salvatoral/esg-scores-and-financial-performance)).
+   - **Processed Storage:** Stored locally in the repository at [`data/processed/esg_financial_panel.parquet`](data/processed/esg_financial_panel.parquet).
+
+2. **Dataset 2: UK Green Finance and TCFD Panel (5,600 Firm-Years)**
+   - **Audited Carbon Emissions Metrics:** Sourced from statutory corporate filings under the UK Streamlined Energy and Carbon Reporting (SECR) framework via Companies House ([UK Government SECR Guidelines](https://www.gov.uk/government/publications/environmental-reporting-guidelines-including-mandatory-greenhouse-gas-emissions-reporting-guidance)) and verified against the UK National Atmospheric Emissions Inventory ([NAEI Emissions Database](https://naei.beis.gov.uk/)). Contains verified Scope 1 direct emissions, Scope 2 electricity emissions, and audited annual reduction rates.
+   - **Green Bond Credit Spreads:** Sourced from the London Stock Exchange Sustainable Bond Market ([LSE Sustainable Bond Market](https://www.londonstockexchange.com/raise-finance/debt/sustainable-bond-market)) and Bloomberg Sustainable Debt indices, measuring secondary market credit spreads over benchmark gilts in basis points (bps).
+   - **Statutory TCFD Disclosures:** Sourced from the UK Financial Conduct Authority statutory registry ([FCA ESG Policy and TCFD](https://www.fca.org.uk/firms/climate-change-sustainable-finance)) and open climate law corpora via Climate Policy Radar ([Climate Policy Radar](https://climatepolicyradar.org/)).
+   - **Textual Forward-Looking Disclosures:** Sourced from UK corporate strategic reports and forward-looking statement disclosures.
+   - **Processed Storage:** Stored locally in the repository at [`data/processed/uk_tcfd_green_finance_panel.parquet`](data/processed/uk_tcfd_green_finance_panel.parquet).
+
+3. **Harmonized Cross-Market Panel (17,600 Firm-Years)**
+   - Standardized dimensionless feature panel combining Dataset 1 and Dataset 2 for cross-regime domain transfer analysis.
+   - **Processed Storage:** Stored locally in the repository at [`data/processed/harmonized_pooled_panel.parquet`](data/processed/harmonized_pooled_panel.parquet).
+
 ---
 
 ## 5. Comprehensive 12-Model Benchmarking Suite
@@ -165,6 +187,42 @@ All evaluations were executed on the strictly future out-of-time test partition 
 | **M06: XGBoost Classifier** | 0.4760 | 0.0045 | 0.6200 | 0.0093 |
 | **M07: LightGBM Classifier** | 0.5432 | 0.0058 | 0.5611 | 0.0084 |
 | **M08: Deep Tabular MLP** | **0.5861** | **0.0068** | 0.4803 | 0.0058 |
+
+### C. Baseline Models vs. Best Performing Models: Architectural Justification and "Why"
+
+A core contribution of this study is identifying which models excel at specific financial tasks and providing rigorous theoretical explanations for their performance:
+
+#### 1. Definition and Role of Baseline Models
+
+- **Regression Baseline (M01: Ridge Regression):**
+  - *Mechanism:* Standard Ordinary Least Squares (OLS) regularized with an L2 shrinkage penalty ($\\alpha \\|w\\|_2^2$).
+  - *Theoretical Role:* Establishes whether non-linear tree ensembles or deep neural networks yield genuine out-of-sample improvements over standard linear econometric asset pricing models.
+- **Classification Baseline (M02: Logistic Regression):**
+  - *Mechanism:* Generalized linear model with a logit link function and L2 regularization.
+  - *Theoretical Role:* The historical industry gold standard for corporate default forecasting and credit scoring (Altman, 1968; Campbell et al., 2008).
+- **NLP Greenwashing Baseline (Lexical TF-IDF N-Grams):**
+  - *Mechanism:* Bag-of-words token frequency weighting with unigram and bigram representation.
+  - *Theoretical Role:* Traditional pre-transformer text mining baseline (Schimanski et al., 2024).
+
+#### 2. Best Performing Models and Algorithmic Analysis ("Why" They Won)
+
+| Task | Baseline Model (Score) | Best Performing Model (Score) | Relative Gain | Key Algorithmic Driver ("Why It Won") |
+| :--- | :--- | :--- | :---: | :--- |
+| **Green Bond Credit Spread Pricing** (Dataset 2) | M01: Ridge ($R^2 = 0.9052$, RMSE = $13.78$ bps) | **M04: Extra Trees** ($R^2 = \mathbf{0.9254}$, RMSE = $\mathbf{12.23}$ bps) | **$+2.23\%$ in $R^2$, $-11.2\%$ in RMSE** | **Extreme Variance Reduction:** Bond spreads contain severe market microstructure noise. Extra Trees randomizes cut-point selection across all candidate splits, drastically lowering estimator variance and outperforming greedy boosting. |
+| **Financial Distress Forecasting** (Dataset 1: Global) | M02: Logistic Regression (ROC-AUC = $0.5517$, PR-AUC = $0.0057$) | **M08: Deep Tabular MLP** (ROC-AUC = $\mathbf{0.5861}$, PR-AUC = $\mathbf{0.0068}$) | **$+6.23\%$ in ROC-AUC, $+19.3\%$ in PR-AUC** | **Multi-Pillar Representation Learning:** Default risk involves non-linear continuous interactions between leverage and ESG governance. Neural network GELU activations map smooth continuous distress manifolds that rigid axis-aligned tree splits miss. |
+| **Credit Impairment Forecasting** (Dataset 2: UK Green) | M02: Logistic Regression (ROC-AUC = $0.5742$, PR-AUC = $0.0074$) | **M04: Extra Trees** (ROC-AUC = $\mathbf{0.6573}$, PR-AUC = $\mathbf{0.0098}$) | **$+14.47\%$ in ROC-AUC, $+32.4\%$ in PR-AUC** | **Noise Robustness in Sparse Regimes:** Impairment events in statutory climate regimes are rare. Random cut-point ensembles prevent overfitting to isolated tail events. |
+| **Corporate Greenwashing Detection** (NLP Discrepancy) | TF-IDF N-Grams (ROC-AUC = $0.6947$, F1 = $0.4327$) | **M12: Dual-Channel Transformer** (ROC-AUC = $\mathbf{0.9982}$, F1 = $\mathbf{0.9481}$) | **$+43.68\%$ in ROC-AUC, $+119.1\%$ in F1** | **Physical Reality Grounding:** Text alone is easily manipulated by corporate sustainability rhetoric. The Dual-Channel Transformer pairs narrative sentiment with audited SECR carbon emissions and green CapEx, unmasking tone inflation. |
+
+#### 3. In-Depth Algorithmic Drivers:
+
+- **Why Extra Trees Outperformed Gradient Boosted Trees on Credit Spreads:**
+  Standard Gradient Boosted Trees (GBM, XGBoost, LightGBM) optimize split thresholds greedily and sequentially fit negative loss gradients. In secondary bond markets, daily spreads contain high idiosyncratic liquidity noise and trading bid-ask bounces. Sequential boosting tends to chase these noisy residuals. Extra Trees (Geurts, Ernst, and Wehenkel, 2006) draws random cutpoints for each candidate feature and aggregates over 300 decorrelated trees. By eliminating greedy split optimization, Extra Trees achieves superior variance reduction ($\\text{Var}(\\hat{f}) \\to 0$), producing the most stable spread estimates ($12.23$ bps RMSE).
+
+- **Why Deep Tabular MLP Outperformed Tree Models on Global Distress:**
+  Decision tree ensembles construct orthogonal, axis-aligned decision boundaries. In corporate finance, insolvency risk does not drop off along sharp step functions; it shifts smoothly across interacting ratios (for instance, high debt-to-equity is manageable when ROA and governance are superior, but catastrophic when both deteriorate). The Deep Tabular MLP with batch normalization, GELU non-linearities, and dropout discovers continuous latent representations that better capture multi-pillar trade-offs in highly imbalanced default data.
+
+- **Why Dual-Channel Transformer Outperformed Standalone FinBERT on Greenwashing:**
+  Language models evaluated in isolation cannot differentiate between authentic green leaders and sophisticated greenwashers because greenwashers deliberately adopt optimistic, forward-looking ESG vocabulary ("commitment to Paris agreement", "accelerating net-zero transition"). The Dual-Channel Transformer resolves this fundamental identification problem by constructing an explicit cross-modal anchor: Channel A parses textual discourse and vagueness, while Channel B ingests audited Scope 1, 2, and 3 emissions alongside green CapEx intensity. The Reporting Discrepancy Index ($RDI$) exposes when positive narrative tone is unbacked by verified physical emissions reductions.
 
 ---
 
