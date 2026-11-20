@@ -38,7 +38,7 @@ The core research questions addressed are:
 
 The empirical workflow consists of four modular stages executed under a strict temporal split to prevent lookahead bias:
 
-![Figure 1: Research Methodology and Pipeline Architecture](outputs/figures/figure1_research_architecture_flowchart.png)
+![Figure 1: Research Methodology and Pipeline Architecture](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure1_research_architecture_flowchart.png)
 
 ### Methodological Stages:
 - **Stage 1 (Multi-Source Panel Ingestion):** 
@@ -57,7 +57,7 @@ The empirical workflow consists of four modular stages executed under a strict t
 
 Consistent with the measurement decomposition established by Berg, Kolbel, and Rigobon (2022), empirical analysis of our three agency proxies confirms marked rating dispersion:
 
-![Figure 2: Empirical Rating Divergence across Agencies](outputs/figures/figure2_rating_divergence.png)
+![Figure 2: Empirical Rating Divergence across Agencies](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure2_rating_divergence.png)
 
 ### Agency Disagreement Summary:
 - **Refinitiv proxy vs. MSCI proxy:** Pearson $r = 0.55$ ($R^2 \approx 0.30$)
@@ -117,7 +117,7 @@ To ensure full transparency and scientific replicability, the empirical datasets
 
 Twelve distinct model architectures were benchmarked across regression, classification, uncertainty estimation, and natural language processing:
 
-![Figure 3: Tabular Benchmarks on Strict Out-of-Time Splits](outputs/figures/figure3_model_benchmarks.png)
+![Figure 3: Tabular Benchmarks on Strict Out-of-Time Splits](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure3_model_benchmarks.png)
 
 ### Model Descriptions and Algorithmic Justifications:
 
@@ -147,7 +147,7 @@ Twelve distinct model architectures were benchmarked across regression, classifi
    - *Role in Study:* Captures non-linear cross-pillar feature interactions in bankruptcy prediction (Liu, Li, and Yu, 2025).
 9. **Model 9: Quantile Gradient Boosted Trees (p10, p50, p90)**
    - *Mathematical Formulation:* Pinball loss optimization $\rho_\tau(u) = u(\tau - \mathbb{I}(u < 0))$.
-   - *Role in Study:* Quantifies non-parametric 80% prediction intervals $[\hat{y}_{0.10}, \hat{y}_{0.90}]$ (Caprioli et al., 2024).
+   - *Role in Study:* Quantifies non-parametric 80% prediction intervals $p10 to p90 prediction interval$ (Caprioli et al., 2024).
 10. **Model 10: Inductive Split Conformal Prediction**
     - *Mathematical Formulation:* $q_{\text{cal}} = \text{Quantile}(|y_i - \hat{y}_i|, \lceil (1-\alpha)(n+1)\rceil/n)$.
     - *Role in Study:* Provides distribution-free, finite-sample valid 90% coverage guarantees on unseen test data without Gaussian assumptions.
@@ -155,7 +155,7 @@ Twelve distinct model architectures were benchmarked across regression, classifi
     - *Mathematical Formulation:* Multi-head self-attention fine-tuned on financial corpora (Araci, 2019; Zhao et al., 2024).
     - *Role in Study:* Resolves financial polysemy and extracts contextual disclosure sentiment.
 12. **Model 12: Dual-Channel Transformer Discrepancy Network**
-    - *Mathematical Formulation:* Reporting Discrepancy Index ($\text{RDI} = \mathcal{Z}(\text{Tone}^{\text{FinBERT}}) - \mathcal{Z}(\text{Performance}^{\text{Audited}})$).
+    - *Mathematical Formulation:* $\text{RDI} = \mathcal{Z}(\text{Tone}^{\text{FinBERT}}) - \mathcal{Z}(\text{Performance}^{\text{Audited}})$
     - *Role in Study:* Pairs narrative sentiment with audited physical carbon performance to detect corporate greenwashing (UK Green Finance Study, 2026).
 
 ---
@@ -164,7 +164,7 @@ Twelve distinct model architectures were benchmarked across regression, classifi
 
 All evaluations were executed on the strictly future out-of-time test partition (2023 to 2025):
 
-![Figure 11: Cross-Dataset Multi-Model Benchmarks](outputs/figures/figure11_cross_dataset_multi_model_benchmark.png)
+![Figure 11: Cross-Dataset Multi-Model Benchmarks](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure11_cross_dataset_multi_model_benchmark.png)
 
 ### A. ESG Score and Credit Spread Regression Benchmarks (2023-2025 Out-of-Time Test)
 | Model Architecture | Dataset 1: ESG $R^2$ | Dataset 1: RMSE | Dataset 2: Spread $R^2$ | Dataset 2: RMSE (bps) |
@@ -195,7 +195,7 @@ A core contribution of this study is identifying which models excel at specific 
 #### 1. Definition and Role of Baseline Models
 
 - **Regression Baseline (M01: Ridge Regression):**
-  - *Mechanism:* Standard Ordinary Least Squares (OLS) regularized with an L2 shrinkage penalty ($\\alpha \\|w\\|_2^2$).
+  - *Mechanism:* Standard Ordinary Least Squares (OLS) regularized with an L2 shrinkage penalty ($\alpha \|w\|_2^2$).
   - *Theoretical Role:* Establishes whether non-linear tree ensembles or deep neural networks yield genuine out-of-sample improvements over standard linear econometric asset pricing models.
 - **Classification Baseline (M02: Logistic Regression):**
   - *Mechanism:* Generalized linear model with a logit link function and L2 regularization.
@@ -216,7 +216,7 @@ A core contribution of this study is identifying which models excel at specific 
 #### 3. In-Depth Algorithmic Drivers:
 
 - **Why Extra Trees Outperformed Gradient Boosted Trees on Credit Spreads:**
-  Standard Gradient Boosted Trees (GBM, XGBoost, LightGBM) optimize split thresholds greedily and sequentially fit negative loss gradients. In secondary bond markets, daily spreads contain high idiosyncratic liquidity noise and trading bid-ask bounces. Sequential boosting tends to chase these noisy residuals. Extra Trees (Geurts, Ernst, and Wehenkel, 2006) draws random cutpoints for each candidate feature and aggregates over 300 decorrelated trees. By eliminating greedy split optimization, Extra Trees achieves superior variance reduction ($\\text{Var}(\\hat{f}) \\to 0$), producing the most stable spread estimates ($12.23$ bps RMSE).
+  Standard Gradient Boosted Trees (GBM, XGBoost, LightGBM) optimize split thresholds greedily and sequentially fit negative loss gradients. In secondary bond markets, daily spreads contain high idiosyncratic liquidity noise and trading bid-ask bounces. Sequential boosting tends to chase these noisy residuals. Extra Trees (Geurts, Ernst, and Wehenkel, 2006) draws random cutpoints for each candidate feature and aggregates over 300 decorrelated trees. By eliminating greedy split optimization, Extra Trees achieves superior variance reduction ($\text{Var}(\hat{f}) \to 0$), producing the most stable spread estimates ($12.23$ bps RMSE).
 
 - **Why Deep Tabular MLP Outperformed Tree Models on Global Distress:**
   Decision tree ensembles construct orthogonal, axis-aligned decision boundaries. In corporate finance, insolvency risk does not drop off along sharp step functions; it shifts smoothly across interacting ratios (for instance, high debt-to-equity is manageable when ROA and governance are superior, but catastrophic when both deteriorate). The Deep Tabular MLP with batch normalization, GELU non-linearities, and dropout discovers continuous latent representations that better capture multi-pillar trade-offs in highly imbalanced default data.
@@ -230,7 +230,7 @@ A core contribution of this study is identifying which models excel at specific 
 
 Standard point predictions fail to convey model confidence. We benchmarked Pinball Loss Quantiles against Inductive Split Conformal Prediction:
 
-![Figure 4: Conformal Prediction Intervals and Coverage Calibration](outputs/figures/figure4_uncertainty_intervals.png)
+![Figure 4: Conformal Prediction Intervals and Coverage Calibration](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure4_uncertainty_intervals.png)
 
 | Uncertainty Method | Nominal Target | Empirical PICP (Coverage) | Mean Interval Width (MPIW) | Winkler Score |
 | :--- | :---: | :---: | :---: | :---: |
@@ -246,12 +246,12 @@ Conformal prediction guarantees finite-sample validity without requiring Gaussia
 
 To ensure that machine learning explanations remain reliable across shifting macro environments, TreeSHAP attributions were computed across two disjoint historical periods (Window 1: 2018-2020 vs. Window 2: 2021-2022):
 
-![Figure 5: TreeSHAP Feature Attributions and Cross-Temporal Stability](outputs/figures/figure5_shap_stability.png)
+![Figure 5: TreeSHAP Feature Attributions and Cross-Temporal Stability](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure5_shap_stability.png)
 
 ### Stability Metrics:
 - **Spearman Rank Stability:** $\rho = 0.6643$ ($p = 0.018$)
 - **Cosine Attribution Similarity:** $\text{Sim}_{\cos} = 0.9886$
-- **Primary Stable Features:** Leverage, Firm Scale ($\log(\text{Assets})$), and Corporate Governance (`pillar_g`).
+- **Primary Stable Features:** Leverage, Firm Scale $\log(\text{Assets})$, and Corporate Governance (`pillar_g`).
 
 ---
 
@@ -259,7 +259,7 @@ To ensure that machine learning explanations remain reliable across shifting mac
 
 Stepwise feature expansions were tested on out-of-time financial distress events (2023-2025):
 
-![Figure 7: Out-of-Time Financial Distress Incremental ROC and PR Curves](outputs/figures/figure7_distress_incremental_roc.png)
+![Figure 7: Out-of-Time Financial Distress Incremental ROC and PR Curves](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure7_distress_incremental_roc.png)
 
 | Model Specification | Features Included | Out-of-Time ROC-AUC | Delta AUC vs Baseline | PR-AUC |
 | :--- | :---: | :---: | :---: | :---: |
@@ -278,22 +278,26 @@ Consistent with Raza et al. (2026), composite ESG ratings do not improve headlin
 
 Narrative sentiment in sustainability reports cannot be evaluated in isolation because greenwashing corporations deliberately produce the most optimistic prose:
 
-![Figure 6: Corporate Greenwashing Discrepancy Matrix](outputs/figures/figure6_greenwashing_matrix.png)
+![Figure 6: Corporate Greenwashing Discrepancy Matrix](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure6_greenwashing_matrix.png)
 
-![Figure 9: The 4-Stage Operational Deployment Framework for ESG-Washing](outputs/figures/figure9_transformer_esg_washing_deployment.png)
+![Figure 9: The 4-Stage Operational Deployment Framework for ESG-Washing](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure9_transformer_esg_washing_deployment.png)
 
 ### The Dual-Channel Discrepancy Framework:
 1. **Channel A (Text Channel):** FinBERT extracts net sentiment polarity ($T_i = P_{\text{pos}} - P_{\text{neg}}$) and Forward-Looking Statement (FLS) vagueness.
 2. **Channel B (Ground-Truth Channel):** Audited physical Scope 1, 2, 3 carbon emissions and verified capital expenditures.
 3. **Reporting Discrepancy Index ($RDI$):**
-   $$\text{RDI}_{i,t} = \mathcal{Z}\Big(\text{Tone}_{i,t}^{\text{FinBERT}}\Big) - \mathcal{Z}\Big(\text{Performance}_{i,t}^{\text{Audited}}\Big)$$
-   - $\text{RDI} > +0.85$: Severe Greenwashing Risk (High narrative optimism, poor actual emissions performance)
+
+$$
+\text{RDI}_{i,t} = \mathcal{Z}\Big(\text{Tone}_{i,t}^{\text{FinBERT}}\Big) - \mathcal{Z}\Big(\text{Performance}_{i,t}^{\text{Audited}}\Big)
+$$
+
+- $\text{RDI} > +0.85$: Severe Greenwashing Risk (High narrative optimism, poor actual emissions performance)
    - $-0.85 \le \text{RDI} \le +0.85$: Authentic Alignment
    - $\text{RDI} < -0.85$: Greenhushing (Under-reporting sustainability accomplishments)
 
-![Figure 8: Contextual Transformer Self-Attention vs Lexical TF-IDF](outputs/figures/figure8_transformer_nlp_greenwash.png)
+![Figure 8: Contextual Transformer Self-Attention vs Lexical TF-IDF](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure8_transformer_nlp_greenwash.png)
 
-![Figure 10: Empirical Reporting Discrepancy Distributions and NLP Benchmarks](outputs/figures/figure10_discrepancy_empirical_benchmark.png)
+![Figure 10: Empirical Reporting Discrepancy Distributions and NLP Benchmarks](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure10_discrepancy_empirical_benchmark.png)
 
 ### Greenwashing Detection Architecture Benchmarks:
 | Model Architecture | Out-of-Time ROC-AUC | F1-Score | Accuracy | Theoretical Assessment |
@@ -309,7 +313,7 @@ Narrative sentiment in sustainability reports cannot be evaluated in isolation b
 
 Comparing Dataset 1 (Global Voluntary Panel) and Dataset 2 (UK Statutory Panel) reveals how regulatory regimes dictate model behavior:
 
-![Figure 13: TreeSHAP Attribution Divergence between Global and UK Regimes](outputs/figures/figure13_comparative_shap_attributions.png)
+![Figure 13: TreeSHAP Attribution Divergence between Global and UK Regimes](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure13_comparative_shap_attributions.png)
 
 ### Why Models Behave Differently across Regimes:
 - **Global Voluntary Regime (Dataset 1):** Balance-sheet solvency (`leverage`, `altman_z`, `roa`) dominates predictive splits. Rating agency disagreement is high ($r \approx 0.55$), rendering headline ratings noisy. Governance (`pillar_g`) and the greenwashing gap emerge as the only statistically informative sustainability metrics.
@@ -318,7 +322,7 @@ Comparing Dataset 1 (Global Voluntary Panel) and Dataset 2 (UK Statutory Panel) 
 ### Cross-Market Harmonization and Domain Transfer:
 Variables were harmonized into dimensionless standardized constructs (`harm_scale`, `harm_leverage`, `harm_financial_health`, `harm_esg_score`, `harm_discrepancy`), creating a **17,600 observation unified panel**:
 
-![Figure 14: Cross-Market Harmonization and Domain Transfer Heatmap](outputs/figures/figure14_harmonized_pooled_domain_transfer.png)
+![Figure 14: Cross-Market Harmonization and Domain Transfer Heatmap](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure14_harmonized_pooled_domain_transfer.png)
 
 | Training Domain (Source) | Test: Global D1 | Test: UK D2 | Test: Pooled (17,600 Obs) | Empirical Takeaway |
 | :--- | :---: | :---: | :---: | :--- |
@@ -330,7 +334,7 @@ Variables were harmonized into dimensionless standardized constructs (`harm_scal
 
 ## 12. Theoretical Taxonomy and Literature Matrix
 
-![Figure 12: Comprehensive Academic Literature Taxonomy Matrix](outputs/figures/figure12_literature_taxonomy_matrix.png)
+![Figure 12: Comprehensive Academic Literature Taxonomy Matrix](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure12_literature_taxonomy_matrix.png)
 
 ### Foundational References:
 1. **Avramov, D., Cheng, S., Lioui, A., and Tarelli, A. (2022).** *Sustainable investing with ESG rating uncertainty.* Journal of Financial Economics, 145(2), 642-664.
