@@ -89,27 +89,40 @@ To ensure rigorous validation across differing institutional regimes, the resear
 - **Dataset 1 (Global Voluntary Panel):** Reflects the prevailing international environment where ESG reporting is largely unstandardized and voluntary. It enables study of rating agency disagreement, narrative disclosure sentiment, and classical corporate bankruptcy prediction.
 - **Dataset 2 (UK Statutory Climate Panel):** Reflects the frontier of statutory climate regulation under the UK Companies Act (Streamlined Energy and Carbon Reporting - SECR) and mandatory TCFD reporting. This dataset enables direct examination of how audited carbon intensity and green capital allocation translate into bond market pricing (credit spreads).
 
-### Data Sources, Provenance, and Access Links
+### Dataset Access and Direct Download Links
 
-To ensure full transparency and scientific replicability, the empirical datasets are compiled from established institutional, financial, and regulatory repositories:
+All research datasets are made publicly available directly within this repository in both interactive web-previewable CSV format and optimized binary Parquet format:
 
-1. **Dataset 1: Global Multi-Agency Panel (12,000 Firm-Years)**
-   - **Financial Fundamentals and Balance Sheet Ratios:** Sourced from the Bureau van Dijk (BvD) Orbis Database ([Orbis Database Portal](https://www.bvdinfo.com/en-gb/our-products/data/international/orbis)) and Wharton Research Data Services ([WRDS Compustat Financials](https://wrds-www.wharton.upenn.edu/)). Key metrics include total assets, financial leverage, return on assets (ROA), current ratio, and Altman Z-score.
-   - **Multi-Agency ESG Divergence Proxies:** Sourced and reconciled from three major rating providers: Refinitiv ESG ([LSEG Data and Analytics](https://www.lseg.com/en/data-analytics)), MSCI ESG Research ([MSCI ESG Ratings](https://www.msci.com/our-solutions/esg-investing)), and Sustainalytics ESG Risk Ratings ([Morningstar Sustainalytics](https://www.sustainalytics.com/esg-data)), along with the open replication repository of the MIT Aggregate Confusion Project ([MIT Aggregate Confusion Project](https://aggregateconfusion.mit.edu/)).
-   - **Corporate Disclosures and CSR Text:** Sourced from corporate 10-K filings and annual CSR reports via the SEC EDGAR System ([SEC EDGAR Company Search](https://www.sec.gov/edgar/searchedgar/companysearch)) and open financial corpora on Hugging Face ([Hugging Face ClimateBERT](https://huggingface.co/datasets/climatebert) and [Financial PhraseBank](https://huggingface.co/datasets/financial_phrasebank)).
-   - **Open Benchmark Reference:** Kaggle ESG Scores and Financial Performance Panels ([Kaggle ESG Dataset](https://www.kaggle.com/datasets/salvatoral/esg-scores-and-financial-performance)).
-   - **Processed Storage:** Stored locally in the repository at [`data/processed/esg_financial_panel.parquet`](data/processed/esg_financial_panel.parquet).
+| Dataset Name | Observations & Dimensions | Interactive Browser Table (GitHub) | Direct 1-Click CSV Download | Binary Parquet Download |
+| :--- | :---: | :---: | :---: | :---: |
+| **Dataset 1: Global Multi-Agency Panel** | 12,000 firm-years (32 features) | [Preview esg_financial_panel.csv](https://github.com/givemehat/esg-ml-risk/blob/main/data/processed/esg_financial_panel.csv) | [Download CSV (4.0 MB)](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/data/processed/esg_financial_panel.csv) | [Download Parquet (1.3 MB)](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/data/processed/esg_financial_panel.parquet) |
+| **Dataset 2: UK Green Finance & TCFD Panel** | 5,600 firm-years (19 features) | [Preview uk_tcfd_green_finance_panel.csv](https://github.com/givemehat/esg-ml-risk/blob/main/data/processed/uk_tcfd_green_finance_panel.csv) | [Download CSV (1.4 MB)](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/data/processed/uk_tcfd_green_finance_panel.csv) | [Download Parquet (378 KB)](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/data/processed/uk_tcfd_green_finance_panel.parquet) |
+| **Harmonized Pooled Cross-Market Panel** | 17,600 firm-years (9 standardized features) | [Preview harmonized_pooled_panel.csv](https://github.com/givemehat/esg-ml-risk/blob/main/data/processed/harmonized_pooled_panel.csv) | [Download CSV (2.1 MB)](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/data/processed/harmonized_pooled_panel.csv) | [Download Parquet (631 KB)](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/data/processed/harmonized_pooled_panel.parquet) |
 
-2. **Dataset 2: UK Green Finance and TCFD Panel (5,600 Firm-Years)**
-   - **Audited Carbon Emissions Metrics:** Sourced from statutory corporate filings under the UK Streamlined Energy and Carbon Reporting (SECR) framework via Companies House ([UK Government SECR Guidelines](https://www.gov.uk/government/publications/environmental-reporting-guidelines-including-mandatory-greenhouse-gas-emissions-reporting-guidance)) and verified against the UK National Atmospheric Emissions Inventory ([NAEI Emissions Database](https://naei.beis.gov.uk/)). Contains verified Scope 1 direct emissions, Scope 2 electricity emissions, and audited annual reduction rates.
-   - **Green Bond Credit Spreads:** Sourced from the London Stock Exchange Sustainable Bond Market ([LSE Sustainable Bond Market](https://www.londonstockexchange.com/raise-finance/debt/sustainable-bond-market)) and Bloomberg Sustainable Debt indices, measuring secondary market credit spreads over benchmark gilts in basis points (bps).
-   - **Statutory TCFD Disclosures:** Sourced from the UK Financial Conduct Authority statutory registry ([FCA ESG Policy and TCFD](https://www.fca.org.uk/firms/climate-change-sustainable-finance)) and open climate law corpora via Climate Policy Radar ([Climate Policy Radar](https://climatepolicyradar.org/)).
-   - **Textual Forward-Looking Disclosures:** Sourced from UK corporate strategic reports and forward-looking statement disclosures.
-   - **Processed Storage:** Stored locally in the repository at [`data/processed/uk_tcfd_green_finance_panel.parquet`](data/processed/uk_tcfd_green_finance_panel.parquet).
+All processed datasets can be browsed directly in the repository directory: [`data/processed/`](https://github.com/givemehat/esg-ml-risk/tree/main/data/processed).
 
-3. **Harmonized Cross-Market Panel (17,600 Firm-Years)**
-   - Standardized dimensionless feature panel combining Dataset 1 and Dataset 2 for cross-regime domain transfer analysis.
-   - **Processed Storage:** Stored locally in the repository at [`data/processed/harmonized_pooled_panel.parquet`](data/processed/harmonized_pooled_panel.parquet).
+---
+
+### External Open-Access Benchmark Data Sources
+
+For researchers wishing to access external source databases directly without proprietary institutional subscriptions, the following 100% open-access public repositories are available:
+
+1. **Hugging Face Open Sustainability and Financial Datasets:**
+   - **ClimateBERT TCFD Recommendations:** [huggingface.co/datasets/climatebert/tcfd_recommendations](https://huggingface.co/datasets/climatebert/tcfd_recommendations) (Expert-labeled corporate climate disclosures)
+   - **ClimateBERT Environmental Claims:** [huggingface.co/datasets/climatebert/environmental_claims](https://huggingface.co/datasets/climatebert/environmental_claims) (Corporate green claims benchmark)
+   - **ClimateBERT Net-Zero Commitments:** [huggingface.co/datasets/climatebert/climate_commitment](https://huggingface.co/datasets/climatebert/climate_commitment) (Corporate emissions reduction targets)
+   - **Financial PhraseBank:** [huggingface.co/datasets/financial_phrasebank](https://huggingface.co/datasets/financial_phrasebank) (Gold-standard financial sentiment corpus)
+
+2. **Kaggle Public Open Datasets (Direct 1-Click Access):**
+   - **ESG Scores and Financial Performance Dataset:** [kaggle.com/datasets/salvatoral/esg-scores-and-financial-performance](https://www.kaggle.com/datasets/salvatoral/esg-scores-and-financial-performance)
+   - **Corporate ESG Ratings and Risk Indicators:** [kaggle.com/datasets/jocelyndumlao/esg-dataset](https://www.kaggle.com/datasets/jocelyndumlao/esg-dataset)
+   - **S&P 500 ESG Risk Metrics and Sector Breakdown:** [kaggle.com/datasets/sohier/sp-500-esg-risk-ratings](https://www.kaggle.com/datasets/sohier/sp-500-esg-risk-ratings)
+
+3. **UK Government and Public Statutory Climate Databases:**
+   - **UK National Greenhouse Gas Emissions Open Data:** [data.gov.uk/dataset/greenhouse-gas-emissions](https://data.gov.uk/dataset/956795f5-9372-46be-a4ee-48cc26bb02be/greenhouse-gas-emissions) (Official UK carbon emissions time series)
+   - **UK National Atmospheric Emissions Inventory (NAEI):** [naei.beis.gov.uk/data/data-selector](https://naei.beis.gov.uk/data/data-selector) (Statutory point-source industrial emissions)
+   - **SEC EDGAR Open Corporate Filings API:** [sec.gov/edgar/searchedgar/companysearch](https://www.sec.gov/edgar/searchedgar/companysearch) (Open public access to corporate annual 10-K and CSR filings)
+   - **MIT Aggregate Confusion Project:** [aggregateconfusion.mit.edu](https://aggregateconfusion.mit.edu/) (Academic research portal for ESG rating divergence replication)
 
 ---
 
