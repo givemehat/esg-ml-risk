@@ -358,25 +358,21 @@ Variables were harmonized into dimensionless standardized constructs (`harm_scal
 
 ---
 
-## 12. Theoretical Taxonomy and Literature Matrix
+## 12. Theoretical Taxonomy, Literature Matrix & Benchmark Papers
 
 ![Figure 12: Comprehensive Academic Literature Taxonomy Matrix](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure12_literature_taxonomy_matrix.png)
 
-### Foundational References:
-1. **Avramov, D., Cheng, S., Lioui, A., and Tarelli, A. (2022).** *Sustainable investing with ESG rating uncertainty.* Journal of Financial Economics, 145(2), 642-664.
-2. **Berg, F., Kolbel, J. F., and Rigobon, R. (2022).** *Aggregate confusion: The divergence of ESG ratings.* Review of Finance, 26(6), 1315-1344.
-3. **Calamai, M., Balalau, D., Le Guenedal, T., and Suchanek, F. (2025).** *Detecting Greenwashing in ESG Disclosures with Large Language Models.* arXiv preprint.
-4. **Caprioli, F., et al. (2024).** *Conformal prediction and uncertainty estimation in corporate sustainability assessments.* Working Paper.
-5. **Christensen, D. M., Serafeim, G., and Sikochi, A. (2022).** *Why is corporate virtue in the eye of the beholder? The case of ESG ratings.* Journal of Accounting and Economics, 73(1), 101456.
-6. **Dossa, et al. (2025).** *Machine learning architectures for ESG pillar decomposition and credit impairment.* Journal of Financial Data Science.
-7. **Giudici, P., and Wu, B. (2025).** *Explainable AI for sustainable credit risk assessment.* Journal of Financial Stability.
-8. **Lagasio, V., and Cucari, N. (2019).** *Corporate governance and environmental reporting: A meta-analytic review.* Corporate Social Responsibility and Environmental Management, 26(4), 701-711.
-9. **Liu, Z., Li, Y., and Yu, H. (2025).** *Predicting financial distress with ESG-driven deep learning and risk-based stratification.* International Journal of Finance and Economics.
-10. **Raza, M. W., Zaidi, S. A. H., and Thalassinos, E. (2026).** *Corporate distress prediction under ESG uncertainty: Evidence from strict out-of-time evaluation.* European Research Studies Journal.
-11. **Schimanski, T., et al. (2024).** *Detecting Greenwashing in Environmental Disclosures using NLP.* Financial Research Letters.
-12. **UK Green Finance Working Group (2026).** *Artificial Intelligence Models for Detecting Greenwashing in UK ESG Disclosures and Green Finance Projects.*
-13. **Zhang, Y., and Zhao, H. (2026).** *Interpretable machine learning for ESG evaluation: A SHAP-XGBoost perspective.* Expert Systems with Applications.
-14. **Zhao, et al. / Asif, et al. (2024/2025).** *Detecting Greenwashing in the Environmental, Social, and Governance Domains Using Natural Language Processing.*
+### Core Benchmark Papers Library:
+
+| Author(s) & Affiliation | Paper Title | Year | Simplified Novelty & Uniqueness | Link |
+| :--- | :--- | :---: | :--- | :--- |
+| **Prof. Valentina Lagasio** *(Sapienza Univ. of Rome)* | *ESG-washing detection in corporate sustainability reports* | 2024 | First to formulate the **ESG-washing Severity Index (ESGSI)**, mathematically quantifying the discrepancy between narrative corporate claims and actual sustainability performance. | [IRFA (Elsevier)](https://doi.org/10.1016/j.irfa.2024.103742) |
+| **Tom Calamai et al.** *(Télécom Paris / IP Paris)* | *Detecting Greenwashing: A Natural Language Processing Literature Survey* | 2025 | Comprehensive review of 60+ AI papers; maps corporate greenwashing into NLP tasks (claim specificity, hedging, selective disclosure) and formalizes why multi-source discrepancy tracking is essential. | [arXiv:2502.07541](https://arxiv.org/abs/2502.07541) |
+| **Schimanski, Leippold et al.** *(Univ. of Zurich / ETH Zurich)* | *ClimateBERT: A Pretrained Language Model for Climate-Related Text* | 2021/24 | Domain-adapted transformer language model tailored to ESG disclosures, enabling automated detection of vague forward-looking promises vs. verified decarbonization (*"Talk vs. Walk"*). | [arXiv:2110.12010](https://arxiv.org/abs/2110.12010) |
+| **Berg, Kölbel, & Rigobon** *(MIT Sloan)* | *Aggregate Confusion: The Divergence of ESG Ratings* | 2022 | Mathematical taxonomy decomposing rating agency divergence into Measurement (56%), Scope (38%), and Weight (6%), establishing why individual agency ratings inject noise into risk models. | [Review of Finance](https://doi.org/10.1093/rof/rfac033) |
+| **Bank of England / Oxford** | *Predicting Bank Distress in the UK with Machine Learning* | 2019/24 | Establishes the empirical gold standard for corporate financial distress forecasting under strict out-of-time temporal validation to prevent look-ahead bias and data leakage. | [BoE Working Paper](https://www.bankofengland.co.uk/working-paper/2019/predicting-bank-distress-in-the-uk-with-machine-learning) |
+
+*Full PDF library available in the repository at [`papers/`](file:///Users/rajnishsingh/Downloads/ESG_RESEARCH/papers/).*
 
 ---
 
@@ -387,6 +383,15 @@ esg-ml-risk/
 ├── README.md                                  # Complete academic documentation
 ├── requirements.txt                           # Pinpoint dependency list
 ├── .gitignore                                 # Clean version control exclusions
+├── papers/                                    # Curated research papers library & annotated index
+│   ├── README.md                              # Detailed literature taxonomy
+│   ├── Lagasio_2024_ESG_Washing_Detection_IRFA.pdf
+│   ├── Araci_2019_FinBERT_Financial_Sentiment.pdf
+│   ├── Webersinke_2021_ClimateBERT.pdf
+│   └── ... (11 foundational papers)
+├── presentation/                              # Conference & meeting presentation slides
+│   ├── presentation_20nov.tex                 # Beamer LaTeX source
+│   └── presentation_20nov.pdf                 # Compiled slide deck
 ├── data/
 │   ├── raw/                                   # Raw input data
 │   └── processed/                             # Processed research datasets
@@ -403,6 +408,18 @@ esg-ml-risk/
 │   ├── distress_eval.py                       # Incremental financial distress modeling (M1-M5)
 │   ├── nlp_greenwashing.py                    # Lexical and vagueness density scoring
 │   ├── transformer_greenwash.py               # Transformer self-attention text encoder
+│   ├── esg_washing_deployment.py              # Dual-channel discrepancy deployment engine
+│   ├── benchmark_10_models.py                 # Multi-model cross-dataset benchmarking suite
+│   ├── cross_dataset_shap_analysis.py         # Comparative SHAP, harmonization, domain transfer
+│   ├── visualize.py                           # Publication chart generation engine
+│   └── pipeline_diagram.py                    # Architecture flowchart generator
+├── experiments/
+│   ├── run_all.py                             # Master execution pipeline
+│   └── generate_figures.py                    # Standalone figure reproduction
+└── outputs/
+    ├── metrics/                               # Empirical CSV and JSON metric tables
+    └── figures/                               # 14 publication figures (300 DPI)
+```
 │   ├── esg_washing_deployment.py              # Dual-channel discrepancy deployment engine
 │   ├── benchmark_10_models.py                 # Multi-model cross-dataset benchmarking suite
 │   ├── cross_dataset_shap_analysis.py         # Comparative SHAP, harmonization, domain transfer
@@ -463,9 +480,45 @@ python src/cross_dataset_shap_analysis.py
 
 ---
 
-## 15. Research Team and Author Information
+## 15. Research Team and Author Contribution Breakdown
 
-- **Rajnish Singh** (@givemehat) — Department of Computer Science and Engineering, Gautam Buddha University
-- **Medhavie Gupta** — Department of Computer Science and Engineering, Gautam Buddha University
-- **Katyayani Jaiswal** — Department of Computer Science and Engineering, Gautam Buddha University
-- **Academic Guide and Advisor:** **Prof. Valentina Lagasio**, Associate Professor in Financial Markets and Institutions, Department of Management, Faculty of Economics, Sapienza University of Rome.
+### Research Authors (CSE AI/ML, Gautam Buddha University):
+
+| Author | Research Focus / Pillar | Core Modules Owned | CRediT Contribution Roles |
+| :--- | :--- | :--- | :--- |
+| **Rajnish Singh** (@givemehat)<br>*Lead Author* | **System Architecture, Financial Distress & Uncertainty** | `experiments/run_all.py`<br>`src/distress_eval.py`<br>`src/uncertainty.py`<br>`src/models_tabular.py` | Conceptualization, System Architecture, Strict Out-of-Time Temporal Evaluation, Conformal Prediction, Master Pipeline & GitHub Lead. |
+| **Medhavie Gupta**<br>*Co-Author* | **NLP, Transformer Models & Greenwashing Detection (Question 2)** | `src/transformer_greenwash.py`<br>`src/nlp_greenwashing.py`<br>`src/esg_washing_deployment.py` | Transformer Fine-Tuning (FinBERT / ClimateBERT), Text Sentiment & Tone Extraction, Multi-Channel Discrepancy Index Formulation, NLP Benchmarks. |
+| **Katyayani Jaiswal**<br>*Co-Author* | **Explainable AI (XAI), Feature Stability & Harmonization (Question 1)** | `src/explainability.py`<br>`src/cross_dataset_shap_analysis.py`<br>`src/benchmark_10_models.py` | TreeSHAP & KernelSHAP Interpretability, Cross-Regime Feature Stability ($\rho$ Rank Correlation), Pillar (E, S, G) Decomposition, Statistical Hypothesis Testing. |
+
+---
+
+### Academic Guide and Advisor:
+- **Prof. Valentina Lagasio**, Associate Professor in Financial Markets and Institutions, Department of Management, Faculty of Economics, Sapienza University of Rome.
+
+---
+
+### Detailed Task Allocation and Work Packages:
+
+#### 1. Medhavie Gupta (Work Package: NLP & Greenwashing Pipeline)
+- **Primary Ownership:** Core Research Question 2 (Transformer NLP & Discrepancy Scoring).
+- **Deliverables:**
+  1. Fine-tuning and inference pipelines for `ProsusAI/finbert` and `climatebert/distilroberta-base-climate-sentiment`.
+  2. Text preprocessing of corporate annual reports, sustainability filings (10-K, CSR, TCFD), and linguistic tone metrics (polarity, subjectivity, forward-looking vague commitments).
+  3. Running empirical comparative benchmarks: Lexicon-based (Loughran-McDonald, TF-IDF) vs. Deep Transformers on sentiment accuracy.
+  4. Authoring Section 8 ("Natural Language Processing and Greenwashing Discrepancy") and Section 9 ("Dual-Channel Transformer Deployment") of the research paper.
+
+#### 2. Katyayani Jaiswal (Work Package: Explainability, Harmonization & Empirical Benchmarks)
+- **Primary Ownership:** Core Research Question 1 (Rating Divergence, XAI & Harmonization).
+- **Deliverables:**
+  1. TreeSHAP and KernelSHAP attribution analysis across all 10 tabular models (Random Forest, XGBoost, LightGBM, CatBoost).
+  2. Temporal and cross-regime stability testing: Spearman $\rho$ rank correlation and Cosine similarity of feature attributions across voluntary vs. statutory reporting regimes.
+  3. Individual ESG Pillar (E, S, G) isolation: Identifying whether Environmental metrics or Governance transparency drives the majority of predictive variance.
+  4. Authoring Section 6 ("Explainability and Temporal Feature Stability") and Section 11 ("Cross-Dataset Comparative Analysis and Harmonization") of the research paper.
+
+#### 3. Rajnish Singh (Work Package: Architecture, Default Risk & Uncertainty Bounds)
+- **Primary Ownership:** Lead Author & System Integration.
+- **Deliverables:**
+  1. Designing the end-to-end multi-source data ingestion pipeline and strict out-of-time (2018-2022 train vs. 2023-2025 test) split to prevent temporal leakage.
+  2. Implementing non-parametric Conformal Prediction calibration to generate 90% finite-sample uncertainty coverage intervals.
+  3. Constructing the 5-specification financial distress model (M1 to M5) to evaluate the incremental predictive power of rating divergence and greenwashing gaps on corporate defaults.
+  4. Repository orchestration, reproducibility automation, LaTeX paper integration, and supervisor liaison.
