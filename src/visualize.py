@@ -63,7 +63,7 @@ def plot_rating_divergence(df: pd.DataFrame, output_path: str):
         ax.set_ylim(10, 95)
         ax.legend(loc="upper left")
 
-    plt.suptitle("Figure 2: Empirical Rating Divergence Across Three Major ESG Rating Agencies", y=1.03, fontweight="bold")
+    plt.suptitle("Figure 2: Simulated Rating Divergence Across Three Agency Proxies", y=1.03, fontweight="bold")
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close()

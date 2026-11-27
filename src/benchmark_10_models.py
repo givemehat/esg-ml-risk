@@ -1,11 +1,11 @@
 """
 Multi-Model & Cross-Dataset Evaluation Engine
-Benchmarks 12 distinct machine learning architectures across 2 comprehensive datasets:
-- Dataset 1: Global Multi-Agency ESG & Financial Distress Panel (12,000 firm-years, 2018-2025)
-- Dataset 2: UK Green Finance & TCFD Climate Disclosures Panel (5,600 firm-years, 2019-2025)
+Benchmarks 8 tabular model families (M01-M08) on a regression and a classification task
+across 2 simulated panels:
+- Panel 1: multi-agency ESG & financial distress panel (12,000 firm-years, 2018-2025)
+- Panel 2: UK green finance & TCFD panel (5,600 firm-years, 2019-2025)
 
-Generates Figure 11 (Cross-Dataset 12-Model Comparative Benchmarks)
-and Figure 12 (Comprehensive Literature Taxonomy Matrix).
+Generates Figure 11 (cross-dataset model comparison) and Figure 12 (literature taxonomy matrix).
 """
 
 import os
@@ -237,7 +237,7 @@ def plot_figure11_cross_dataset_comparison(
         ax4.annotate(f"{w:.3f}", (w, p.get_y() + p.get_height() / 2.),
                      ha="left", va="center", xytext=(5, 0), textcoords="offset points", fontsize=9.5)
 
-    plt.suptitle("Figure 11: Cross-Dataset Multi-Model Benchmarks (12 Models Evaluated Across 2 Empirical Datasets)", y=1.02, fontweight="bold", fontsize=15)
+    plt.suptitle("Figure 11: Cross-Dataset Model Benchmarks (8 Model Families Across 2 Simulated Panels)", y=1.02, fontweight="bold", fontsize=15)
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close()

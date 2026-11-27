@@ -92,20 +92,29 @@ class ESGTransformerDeploymentEngine:
         test_idx: np.ndarray
     ) -> pd.DataFrame:
         """
-        Benchmarks 4 Transformer & NLP architectures on detecting verified greenwashing:
-        1. Lexical N-Gram (TF-IDF Baseline)
-        2. Domain-Dictionary Rule Classifier (Loughran-McDonald & ESG Lexicon)
-        3. Standalone FinBERT Sentiment
-        4. Integrated Transformer Discrepancy Model (FinBERT Sentiment + FLS Vagueness + Audited Performance)
+        PROTOTYPE PROXY BENCHMARK — not a transformer evaluation.
+
+        No language model is fine-tuned or executed here. Each "architecture" is a plain
+        LogisticRegression trained on a different subset of the pre-computed tabular text
+        columns produced by the synthetic data generator (nlp_sentiment, nlp_vagueness,
+        fls_vagueness, fls_concrete). The feature sets are named after the information
+        channel they stand in for, not after a model family.
+
+        LABEL CIRCULARITY (read before citing these numbers):
+        The target is the Reporting Discrepancy Index threshold, y = 1[RDI > 0.85], and
+        RDI is itself built from nlp_sentiment minus audited performance. Any feature set
+        containing nlp_sentiment therefore partly reconstructs the label. The resulting
+        ROC-AUC values measure how well each channel reproduces the index, NOT how well a
+        model detects real-world greenwashing. Treat them as a decomposition / consistency
+        check, not as out-of-sample detection performance.
         """
-        # Ground truth label: 1 if RDI > 1.0 (Severe Greenwashing discrepancy), 0 otherwise
         y_true = (df["rdi_score"] > 0.85).astype(int).values
 
         features_dict = {
-            "1. Lexical TF-IDF N-Grams": df[["fls_vagueness", "fls_concrete"]],
-            "2. ESG Lexicon Tone Only": df[["nlp_sentiment"]],
-            "3. FinBERT Sentiment Classifier": df[["nlp_sentiment", "nlp_vagueness"]],
-            "4. Full Transformer Discrepancy Framework": df[["nlp_sentiment", "nlp_vagueness", "fls_vagueness", "pillar_e", "esg_disagreement"]]
+            "1. Vagueness proxy (FLS vagueness, concreteness)": df[["fls_vagueness", "fls_concrete"]],
+            "2. Tone proxy (disclosure sentiment)": df[["nlp_sentiment"]],
+            "3. Tone + vagueness proxy": df[["nlp_sentiment", "nlp_vagueness"]],
+            "4. Multi-channel proxy (tone, vagueness, E pillar, disagreement)": df[["nlp_sentiment", "nlp_vagueness", "fls_vagueness", "pillar_e", "esg_disagreement"]]
         }
 
         results = []
@@ -124,7 +133,7 @@ class ESGTransformerDeploymentEngine:
                 "ROC-AUC": round(roc_auc, 4),
                 "F1-Score": round(f1, 4),
                 "Accuracy": round(acc, 4),
-                "Justification": "Captures both textual rhetoric & quantitative carbon reality" if "Full" in model_name else "Text-only baseline (vulnerable to tone camouflage)"
+                "Justification": "Includes audited-performance proxies; shares inputs with the label" if "Multi-channel" in model_name else "Text channel only; shares inputs with the label"
             })
 
         return pd.DataFrame(results)
@@ -274,7 +283,7 @@ def plot_figure10_discrepancy_empirical_benchmark(
     output_path: str
 ):
     """
-    Figure 10: Empirical Reporting Discrepancy (RDI) Distributions & Transformer Benchmark Performance
+    Figure 10: Simulated Reporting Discrepancy (RDI) Distributions & Proxy Benchmark
     """
     fig, axes = plt.subplots(1, 2, figsize=(16, 6))
 
@@ -294,7 +303,7 @@ def plot_figure10_discrepancy_empirical_benchmark(
     )
     ax1.axvline(0.85, color="#c0392b", linestyle="--", linewidth=1.8, label="High Greenwash Threshold")
     ax1.axvline(-0.85, color="#2980b9", linestyle="--", linewidth=1.8, label="Greenhushing Threshold")
-    ax1.set_title("Panel A: Empirical Distribution of Reporting Discrepancy Index (RDI)", fontweight="bold")
+    ax1.set_title("Panel A: Simulated Distribution of Reporting Discrepancy Index (RDI)", fontweight="bold")
     ax1.set_xlabel("Reporting Discrepancy Index (RDI = Z(Sentiment) - Z(Actual Carbon Score))")
     ax1.set_ylabel("Density of Observations")
     ax1.legend(loc="upper right", fontsize=9)
@@ -311,7 +320,7 @@ def plot_figure10_discrepancy_empirical_benchmark(
         ax2.annotate(f"{w:.3f}", (w, p.get_y() + p.get_height() / 2.),
                      ha="left", va="center", xytext=(6, 0), textcoords="offset points", fontweight="bold", fontsize=10)
 
-    plt.suptitle("Figure 10: Empirical Reporting Discrepancy & Transformer Architecture Benchmarking", y=1.02, fontweight="bold")
+    plt.suptitle("Figure 10: Simulated Reporting Discrepancy & Text-Channel Proxy Benchmarking", y=1.02, fontweight="bold")
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close()
@@ -347,7 +356,7 @@ if __name__ == "__main__":
     
     print("\nGenerating Figure 9 (Deployment Architecture Flowchart)...")
     plot_figure9_deployment_architecture(fig9_path)
-    print("Generating Figure 10 (Empirical Benchmark & Discrepancy Curves)...")
+    print("Generating Figure 10 (Simulated Discrepancy Curves & Proxy Benchmark)...")
     plot_figure10_discrepancy_empirical_benchmark(df, benchmark_df, fig10_path)
 
     # Also save enriched parquet
