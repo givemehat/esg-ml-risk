@@ -5,12 +5,11 @@
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Status: Academic Research](https://img.shields.io/badge/Status-Research%20Working%20Paper-orange.svg)](https://github.com/givemehat/esg-ml-risk)
 
-> **Academic Research Project and Presentation Companion**  
-> **Authors:** Rajnish Singh (@givemehat), Medhavie Gupta, Katyayani Jaiswal  
-> *Department of Computer Science and Engineering, Gautam Buddha University, Greater Noida*  
-> **Academic Guide and Advisor:** Prof. Valentina Lagasio  
-> *Associate Professor in Financial Markets and Institutions, Department of Management, Sapienza University of Rome*  
-> **Meeting and Presentation Date:** 20 November 2026
+> **Academic Research Project and Working Paper**  
+> **Authors:** Rajnish Singh (@givemehat)$^1$, Medhavie Gupta$^1$, Katyayani Jaiswal$^1$, Prof. Valentina Lagasio$^2$  
+> $^1$*Department of Computer Science and Engineering, Gautam Buddha University, Greater Noida, India*  
+> $^2$*Department of Management, Faculty of Economics, Sapienza University of Rome, Italy*  
+> **Presentation & Research Milestone:** November 2026
 
 > [!TIP]
 > **Academic Presentation Deck & Overleaf Package Available:**  
@@ -486,24 +485,28 @@ python src/cross_dataset_shap_analysis.py
 
 ## 15. Research Team and Author Contribution Breakdown
 
-### Research Authors (CSE AI/ML, Gautam Buddha University):
+### Research Co-Authors & Affiliations:
 
-| Author | Research Focus / Pillar | Core Modules Owned | CRediT Contribution Roles |
+| Author & Affiliation | Research Focus / Pillar | Core Modules Owned | CRediT Contribution Roles |
 | :--- | :--- | :--- | :--- |
-| **Rajnish Singh** (@givemehat)<br>*Lead Author* | **System Architecture, Financial Distress & Uncertainty** | `experiments/run_all.py`<br>`src/distress_eval.py`<br>`src/uncertainty.py`<br>`src/models_tabular.py` | Conceptualization, System Architecture, Strict Out-of-Time Temporal Evaluation, Conformal Prediction, Master Pipeline & GitHub Lead. |
-| **Medhavie Gupta**<br>*Co-Author* | **NLP, Transformer Models & Greenwashing Detection (Question 2)** | `src/transformer_greenwash.py`<br>`src/nlp_greenwashing.py`<br>`src/esg_washing_deployment.py` | Transformer Fine-Tuning (FinBERT / ClimateBERT), Text Sentiment & Tone Extraction, Multi-Channel Discrepancy Index Formulation, NLP Benchmarks. |
-| **Katyayani Jaiswal**<br>*Co-Author* | **Explainable AI (XAI), Feature Stability & Harmonization (Question 1)** | `src/explainability.py`<br>`src/cross_dataset_shap_analysis.py`<br>`src/benchmark_10_models.py` | TreeSHAP & KernelSHAP Interpretability, Cross-Regime Feature Stability ($\rho$ Rank Correlation), Pillar (E, S, G) Decomposition, Statistical Hypothesis Testing. |
-
----
-
-### Academic Guide and Advisor:
-- **Prof. Valentina Lagasio**, Associate Professor in Financial Markets and Institutions, Department of Management, Faculty of Economics, Sapienza University of Rome.
+| **Rajnish Singh** (@givemehat)<br>*Lead Author*<br>*(Gautam Buddha University)* | **System Architecture, Financial Distress & Uncertainty** | `experiments/run_all.py`<br>`src/distress_eval.py`<br>`src/uncertainty.py`<br>`src/models_tabular.py` | Conceptualization, System Architecture, Strict Out-of-Time Temporal Evaluation, Conformal Prediction, Master Pipeline & GitHub Lead. |
+| **Prof. Valentina Lagasio**<br>*Co-Author & Academic Guide*<br>*(Sapienza University of Rome)* | **Econometric Grounding, ESGSI Theory & Financial Markets** | Theoretical Framework & ESGSI Formulation (`papers/Lagasio_2024_ESG_Washing_Detection_IRFA.pdf`) | Conceptualization, Econometric Supervision, ESGSI Formulation, Financial Markets Domain Expertise, Writing – Review & Editing. |
+| **Medhavie Gupta**<br>*Co-Author*<br>*(Gautam Buddha University)* | **NLP, Transformer Models & Greenwashing Detection (Question 2)** | `src/transformer_greenwash.py`<br>`src/nlp_greenwashing.py`<br>`src/esg_washing_deployment.py` | Transformer Fine-Tuning (FinBERT / ClimateBERT), Text Sentiment & Tone Extraction, Multi-Channel Discrepancy Index Formulation, NLP Benchmarks. |
+| **Katyayani Jaiswal**<br>*Co-Author*<br>*(Gautam Buddha University)* | **Explainable AI (XAI), Feature Stability & Harmonization (Question 1)** | `src/explainability.py`<br>`src/cross_dataset_shap_analysis.py`<br>`src/benchmark_10_models.py` | TreeSHAP & KernelSHAP Interpretability, Cross-Regime Feature Stability ($\rho$ Rank Correlation), Pillar (E, S, G) Decomposition, Statistical Hypothesis Testing. |
 
 ---
 
 ### Detailed Task Allocation and Work Packages:
 
-#### 1. Medhavie Gupta (Work Package: NLP & Greenwashing Pipeline)
+#### 1. Prof. Valentina Lagasio (Co-Author & Academic Advisor)
+- **Primary Ownership:** Econometric Methodology, Foundational ESG-Washing Theory & Financial Domain Guidance.
+- **Contributions & Deliverables:**
+  1. Theoretical formulation and econometric alignment of the **ESG-washing Severity Index (ESGSI)** from Lagasio (2024, *IRFA*).
+  2. Supervision of multi-agency ESG rating divergence taxonomy (measurement error vs. scope vs. weightings).
+  3. Guidance on financial markets risk interpretation (green bond credit spreads and bank default signaling).
+  4. Academic paper review, journal positioning (e.g., *IRFA*, *Journal of Financial Data Science*), and policy implications framing.
+
+#### 2. Medhavie Gupta (Work Package: NLP & Greenwashing Pipeline)
 - **Primary Ownership:** Core Research Question 2 (Transformer NLP & Discrepancy Scoring).
 - **Deliverables:**
   1. Fine-tuning and inference pipelines for `ProsusAI/finbert` and `climatebert/distilroberta-base-climate-sentiment`.
@@ -511,7 +514,7 @@ python src/cross_dataset_shap_analysis.py
   3. Running empirical comparative benchmarks: Lexicon-based (Loughran-McDonald, TF-IDF) vs. Deep Transformers on sentiment accuracy.
   4. Authoring Section 8 ("Natural Language Processing and Greenwashing Discrepancy") and Section 9 ("Dual-Channel Transformer Deployment") of the research paper.
 
-#### 2. Katyayani Jaiswal (Work Package: Explainability, Harmonization & Empirical Benchmarks)
+#### 3. Katyayani Jaiswal (Work Package: Explainability, Harmonization & Empirical Benchmarks)
 - **Primary Ownership:** Core Research Question 1 (Rating Divergence, XAI & Harmonization).
 - **Deliverables:**
   1. TreeSHAP and KernelSHAP attribution analysis across all 10 tabular models (Random Forest, XGBoost, LightGBM, CatBoost).
@@ -519,7 +522,7 @@ python src/cross_dataset_shap_analysis.py
   3. Individual ESG Pillar (E, S, G) isolation: Identifying whether Environmental metrics or Governance transparency drives the majority of predictive variance.
   4. Authoring Section 6 ("Explainability and Temporal Feature Stability") and Section 11 ("Cross-Dataset Comparative Analysis and Harmonization") of the research paper.
 
-#### 3. Rajnish Singh (Work Package: Architecture, Default Risk & Uncertainty Bounds)
+#### 4. Rajnish Singh (Work Package: Architecture, Default Risk & Uncertainty Bounds)
 - **Primary Ownership:** Lead Author & System Integration.
 - **Deliverables:**
   1. Designing the end-to-end multi-source data ingestion pipeline and strict out-of-time (2018-2022 train vs. 2023-2025 test) split to prevent temporal leakage.

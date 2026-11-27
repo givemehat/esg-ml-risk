@@ -56,9 +56,8 @@
 % ==============================================================================
 \title[\textbf{ESG Assessment, Rating Divergence \& Greenwashing NLP}]{Machine Learning for ESG Assessment and Financial Risk}
 \subtitle{Rating Divergence, Conformal Uncertainty, and Transformer Greenwashing NLP}
-\author[\textbf{R. Singh, M. Gupta, K. Jaiswal}]{%
-  \textbf{Rajnish Singh}$^{1}$ \quad \textbf{Medhavie Gupta}$^{1}$ \quad \textbf{Katyayani Jaiswal}$^{1}$\\[3pt]
-  {\small Academic Guide \& Advisor: \textbf{Prof. Valentina Lagasio}$^{2}$}
+\author[\textbf{R. Singh et al.}]{%
+  \textbf{Rajnish Singh}$^{1}$ \quad \textbf{Medhavie Gupta}$^{1}$ \quad \textbf{Katyayani Jaiswal}$^{1}$ \quad \textbf{Prof. Valentina Lagasio}$^{2}$
 }
 \institute[\textbf{GBU \& Sapienza}]{
   $^{1}$Department of Computer Science and Engineering, Gautam Buddha University, Greater Noida, India\\
@@ -131,9 +130,9 @@
     \end{minipage}
   \end{column}
 \end{columns}
-\vspace{6pt}
-\begin{block}{\textbf{Academic Guidance}}
-  \centering\small Guided and advised by \textbf{Prof. Valentina Lagasio}, Associate Professor in Financial Markets and Institutions, Department of Management, Sapienza University of Rome.
+\vspace{4pt}
+\begin{block}{\textbf{Co-Author \& Academic Advisor: Prof. Valentina Lagasio (Sapienza University of Rome)}}
+  \centering\footnotesize Associate Professor in Financial Markets and Institutions. Leading econometric grounding, ESGSI theoretical formulation (\emph{IRFA 2024}), financial markets validation, and academic supervision.
 \end{block}
 \end{frame}
 
@@ -543,17 +542,19 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 % ------------------------------------------------------------
 % SLIDE 22: Team Work Allocation & Deliverables
 % ------------------------------------------------------------
-\begin{frame}[t]{Team Work Allocation \& GitHub Milestones}
+\begin{frame}[t]{Team Work Allocation \& Research Milestones}
 \small
-\begin{tabular}{@{}p{2.8cm}p{3.8cm}p{3.8cm}p{3.2cm}@{}}
+\begin{tabular}{@{}p{2.6cm}p{3.3cm}p{4.2cm}p{2.7cm}@{}}
 \toprule
-\textbf{Author} & \textbf{Core Module Ownership} & \textbf{Key Research Tasks} & \textbf{GitHub Tracking} \\
+\textbf{Author} & \textbf{Core Module Ownership} & \textbf{Key Research Tasks} & \textbf{Contribution Role} \\
 \midrule
-\textbf{Rajnish Singh}\\ {\scriptsize Lead Author} & \texttt{experiments/run\_all.py}\\\texttt{src/distress\_eval.py}\\\texttt{src/uncertainty.py} & Master architecture, strict out-of-time splits, Conformal prediction, M1-M5 models & \textbf{Issue \#3} (Assigned)\\
+\textbf{Rajnish Singh}\\ {\scriptsize Lead Author (GBU)} & \texttt{experiments/run\_all.py}\\\texttt{src/distress\_eval.py}\\\texttt{src/uncertainty.py} & Master architecture, strict out-of-time splits, Conformal prediction, M1-M5 models & Architecture \& Default Modeling (\textbf{\#3})\\
 \addlinespace
-\textbf{Medhavie Gupta}\\ {\scriptsize Co-Author} & \texttt{src/transformer\_greenwash.py}\\\texttt{src/nlp\_greenwashing.py}\\\texttt{src/esg\_washing\_deployment.py} & FinBERT/ClimateBERT inference, Tone extraction, Discrepancy index ($D_i$) & \textbf{Issue \#2} (Assigned)\\
+\textbf{Prof. V. Lagasio}\\ {\scriptsize Co-Author (Sapienza)} & Econometric Framework \& ESGSI Validation & ESGSI econometric formulation, divergence taxonomy, journal positioning & Econometric Grounding \& Supervision\\
 \addlinespace
-\textbf{Katyayani Jaiswal}\\ {\scriptsize Co-Author} & \texttt{src/explainability.py}\\\texttt{src/cross\_dataset\_shap\_analysis.py}\\\texttt{src/benchmark\_10\_models.py} & TreeSHAP attributions, $\rho$ stability, E-S-G pillar decomposition & \textbf{Issue \#1} (Assigned)\\
+\textbf{Medhavie Gupta}\\ {\scriptsize Co-Author (GBU)} & \texttt{src/transformer\_greenwash.py}\\\texttt{src/nlp\_greenwashing.py}\\\texttt{src/esg\_washing\_deployment.py} & FinBERT/ClimateBERT inference, Tone extraction, Discrepancy index ($D_i$) & NLP \& Greenwashing Lead (\textbf{\#2})\\
+\addlinespace
+\textbf{Katyayani Jaiswal}\\ {\scriptsize Co-Author (GBU)} & \texttt{src/explainability.py}\\\texttt{src/cross\_dataset\_shap\_analysis.py}\\\texttt{src/benchmark\_10\_models.py} & TreeSHAP attributions, $\rho$ stability, E-S-G pillar decomposition & XAI \& Harmonization Lead (\textbf{\#1})\\
 \bottomrule
 \end{tabular}
 \end{frame}
