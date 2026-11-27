@@ -6,7 +6,7 @@
 [![Status: Academic Research](https://img.shields.io/badge/Status-Research%20Working%20Paper-orange.svg)](https://github.com/givemehat/esg-ml-risk)
 
 > **Academic Research Project and Working Paper**  
-> **Authors:** Rajnish Singh (@givemehat)$^1$, Medhavie Gupta$^1$, Katyayani Jaiswal$^1$, Prof. Valentina Lagasio$^2$  
+> **Authors:** Rajnish Singh (@givemehat), Medhavie Gupta, Katyayani Jaiswal, Prof. Valentina Lagasio  
 > $^1$*Department of Computer Science and Engineering, Gautam Buddha University, Greater Noida, India*  
 > $^2$*Department of Management, Faculty of Economics, Sapienza University of Rome, Italy*  
 > **Presentation & Research Milestone:** November 2026
