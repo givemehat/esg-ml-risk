@@ -71,7 +71,7 @@ def generate_pipeline_flowchart(output_path: str):
     # Title & Authors Header
     ax.text(50, 97.2, "End-to-End Machine Learning and NLP Framework for ESG Assessment & Financial Risk", 
             ha="center", va="center", fontsize=16.5, fontweight="bold", color="#17202a")
-    ax.text(50, 94.2, "Rajnish Singh (@givemehat) · Medhavie Gupta · Katyayani Jaiswal (Gautam Buddha Univ.) | Guide: Prof. Valentina Lagasio (Sapienza Univ. of Rome)",
+    ax.text(50, 94.2, "Rajnish Singh (@givemehat) · Katyayani Jaiswal (Gautam Buddha Univ.) | Guide: Prof. Valentina Lagasio (Sapienza Univ. of Rome)",
             ha="center", va="center", fontsize=10.5, fontstyle="italic", color="#566573")
 
     # Stage 1: Data Ingestion (Left Column)
