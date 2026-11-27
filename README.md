@@ -6,11 +6,9 @@
 [![Status: Academic Research](https://img.shields.io/badge/Status-Research%20Working%20Paper-orange.svg)](https://github.com/givemehat/esg-ml-risk)
 
 > **Academic Research Project and Working Paper**  
-> **Author:** Rajnish Singh (@givemehat)  
-> **Co-Authors:** Katyayani Jaiswal, Prof. Valentina Lagasio  
-> **Institutions:**  
-> - Department of Computer Science and Engineering, Gautam Buddha University, Greater Noida, India  
-> - Department of Management, Faculty of Economics, Sapienza University of Rome, Italy  
+> **Authors:** Rajnish Singh (@givemehat), Katyayani Jaiswal  
+> **Academic Guide & Supervisor:** Prof. Valentina Lagasio *(Associate Professor in Financial Markets and Institutions, Department of Management, Sapienza University of Rome, Italy)*  
+> **Affiliation:** Department of Computer Science and Engineering, Gautam Buddha University, Greater Noida, India  
 > **Presentation & Research Milestone:** November 2026
 
 > [!TIP]
@@ -485,24 +483,27 @@ python src/cross_dataset_shap_analysis.py
 
 ---
 
-## 15. Research Team and Author Contribution Breakdown
+## 15. Research Team and Academic Guidance
 
-### Research Author & Co-Authors:
+### Academic Guide & Supervisor:
+- **Prof. Valentina Lagasio** — *Associate Professor in Financial Markets and Institutions, Department of Management, Faculty of Economics, Sapienza University of Rome, Italy*
+  - **Guidance & Supervision:** Econometric methodology, ESG-washing Severity Index (ESGSI) theoretical foundation (`papers/Lagasio_2024_ESG_Washing_Detection_IRFA.pdf`), financial markets domain expertise, and academic review.
 
-| Author & Affiliation | Research Focus / Pillar | Core Modules Owned | CRediT Contribution Roles |
+### Research Authors (Gautam Buddha University):
+
+| Author | Research Focus / Pillar | Core Modules Owned | CRediT Contribution Roles |
 | :--- | :--- | :--- | :--- |
-| **Rajnish Singh** (@givemehat)<br>*Author*<br>*(Gautam Buddha University)* | **System Architecture, Financial Distress & Uncertainty** | `experiments/run_all.py`<br>`src/distress_eval.py`<br>`src/uncertainty.py`<br>`src/models_tabular.py` | Conceptualization, System Architecture, Strict Out-of-Time Temporal Evaluation, Conformal Prediction, Master Pipeline & GitHub Management. |
-| **Prof. Valentina Lagasio**<br>*Co-Author & Academic Guide*<br>*(Sapienza University of Rome)* | **Econometric Grounding, ESGSI Theory & Financial Markets** | Theoretical Framework & ESGSI Formulation (`papers/Lagasio_2024_ESG_Washing_Detection_IRFA.pdf`) | Conceptualization, Econometric Supervision, ESGSI Formulation, Financial Markets Domain Expertise, Writing – Review & Editing. |
-| **Katyayani Jaiswal**<br>*Co-Author*<br>*(Gautam Buddha University)* | **Explainable AI (XAI), Feature Stability & Harmonization (Question 1)** | `src/explainability.py`<br>`src/cross_dataset_shap_analysis.py`<br>`src/benchmark_10_models.py` | TreeSHAP & KernelSHAP Interpretability, Cross-Regime Feature Stability ($\rho$ Rank Correlation), Pillar (E, S, G) Decomposition, Statistical Hypothesis Testing. |
+| **Rajnish Singh** (@givemehat)<br>*(Gautam Buddha University)* | **System Architecture, Financial Distress & Uncertainty** | `experiments/run_all.py`<br>`src/distress_eval.py`<br>`src/uncertainty.py`<br>`src/models_tabular.py` | Conceptualization, System Architecture, Strict Out-of-Time Temporal Evaluation, Conformal Prediction, Master Pipeline & GitHub Management. |
+| **Katyayani Jaiswal**<br>*(Gautam Buddha University)* | **Explainable AI (XAI), Feature Stability & Harmonization (Question 1)** | `src/explainability.py`<br>`src/cross_dataset_shap_analysis.py`<br>`src/benchmark_10_models.py` | TreeSHAP & KernelSHAP Interpretability, Cross-Regime Feature Stability ($\rho$ Rank Correlation), Pillar (E, S, G) Decomposition, Statistical Hypothesis Testing. |
 
 ---
 
 ### Detailed Task Allocation and Work Packages:
 
-#### Prof. Valentina Lagasio (Co-Author & Academic Advisor)
-- **Primary Ownership:** Econometric Methodology, Foundational ESG-Washing Theory & Financial Domain Guidance.
-- **Contributions & Deliverables:**
-  1. Theoretical formulation and econometric alignment of the **ESG-washing Severity Index (ESGSI)** from Lagasio (2024, *IRFA*).
+#### Prof. Valentina Lagasio (Academic Guide & Supervisor)
+- **Role:** Senior Academic Supervision, Econometric Grounding & Financial Domain Guidance.
+- **Guidance Areas:**
+  1. Theoretical foundation and econometric alignment of the **ESG-washing Severity Index (ESGSI)** from Lagasio (2024, *IRFA*).
   2. Supervision of multi-agency ESG rating divergence taxonomy (measurement error vs. scope vs. weightings).
   3. Guidance on financial markets risk interpretation (green bond credit spreads and bank default signaling).
   4. Academic paper review, journal positioning (e.g., *IRFA*, *Journal of Financial Data Science*), and policy implications framing.
