@@ -62,7 +62,7 @@ def main():
     print(f"Total Observations: {len(df)} across {df['firm_id'].nunique()} firms and {df['year'].nunique()} years (2018-2025).")
 
     # 2. NLP & Greenwashing Analysis
-    print("\n[Step 2/7] Running NLP Greenwashing & Linguistic Analysis (Theme C)...")
+    print("\n[Step 3/8] Running NLP Greenwashing & Linguistic Analysis (Theme C)...")
     nlp_analyzer = ESGGreenwashingAnalyzer()
     text_features = nlp_analyzer.extract_text_features(df["csr_disclosure"].tolist())
     df["vague_density"] = text_features["vague_density"]
@@ -91,13 +91,13 @@ def main():
     plot_greenwashing_matrix(df, os.path.join(figures_dir, "figure6_greenwashing_matrix.png"))
 
     # 3. Strict Out-of-Time Temporal Split (Raza et al. 2026)
-    print("\n[Step 3/7] Creating strict out-of-time temporal split (Train: 2018-2022, Test: 2023-2025)...")
+    print("\n[Step 4/8] Creating strict out-of-time temporal split (Train: 2018-2022, Test: 2023-2025)...")
     train_df, test_df = get_temporal_splits(df, train_end_year=2022)
     print(f"  -> Training sample: {len(train_df)} firm-years (2018-2022)")
     print(f"  -> Out-of-time test sample: {len(test_df)} firm-years (2023-2025)")
 
     # 4. Tabular Benchmark Suite (Ridge, RF, Extra Trees, XGBoost, LightGBM)
-    print("\n[Step 4/7] Training tabular ML models on ESG Score Prediction and Distress Classification...")
+    print("\n[Step 5/8] Training tabular ML models on ESG Score Prediction and Distress Classification...")
     tabular_suite = TabularESGModelSuite(random_state=42)
     
     # Task A: Consensus ESG Score Prediction
@@ -121,7 +121,7 @@ def main():
     plot_model_benchmarks(reg_metrics, clf_metrics, os.path.join(figures_dir, "figure3_model_benchmarks.png"))
 
     # 5. Uncertainty Quantification & Conformal Prediction (Theme A, RQ1)
-    print("\n[Step 5/7] Quantifying ESG Prediction Uncertainty (Quantile Regression & Conformal Intervals)...")
+    print("\n[Step 6/8] Quantifying ESG Prediction Uncertainty (Quantile Regression & Conformal Intervals)...")
     uncertainty_suite = ESGUncertaintyEstimator(random_state=42)
     
     # Calibration set: year 2022; Core train: 2018-2021
@@ -155,7 +155,7 @@ def main():
     )
 
     # 6. TreeSHAP & Temporal Attribution Stability (Theme A, RQ7)
-    print("\n[Step 6/7] Computing TreeSHAP Values and Temporal Stability across Time Windows...")
+    print("\n[Step 7/8] Computing TreeSHAP Values and Temporal Stability across Time Windows...")
     xgb_reg = tabular_suite.models_reg["XGBoost"]
     explainability_suite = ESGExplainabilitySuite(xgb_reg, all_features_reg)
     shap_matrix, global_importance = explainability_suite.compute_shap_values(test_df[all_features_reg])
@@ -182,7 +182,7 @@ def main():
     plot_shap_summary(global_importance, merged_stability_df, os.path.join(figures_dir, "figure5_shap_stability.png"))
 
     # 7. Financial Distress Incremental Information (Theme B, RQ2, RQ5, RQ6)
-    print("\n[Step 7/7] Evaluating Incremental Predictive Value on Financial Distress (M1 to M5)...")
+    print("\n[Step 8/8] Evaluating Incremental Predictive Value on Financial Distress (M1 to M5)...")
     distress_evaluator = FinancialDistressEvaluator(random_state=42)
     incremental_results, distress_probs = distress_evaluator.run_incremental_comparison(
         train_df, test_df, model_type="lightgbm", target_col="financial_distress_t1"

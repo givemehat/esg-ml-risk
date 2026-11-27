@@ -6,7 +6,7 @@ Dataset 1 (Global Panel),M05: Gradient Boosting Classifier,Financial Distress Ou
 Dataset 1 (Global Panel),M06: XGBoost Classifier,Financial Distress Out-of-Time,0.476,0.0045
 Dataset 1 (Global Panel),M07: LightGBM Classifier,Financial Distress Out-of-Time,0.5432,0.0058
 Dataset 1 (Global Panel),M08: Deep Tabular MLP Classifier,Financial Distress Out-of-Time,0.5861,0.0068
-Dataset 2 (UK Green Finance),M02: Logistic Regression,Credit Distress Out-of-Time,0.5742,0.0074
+Dataset 2 (UK Green Finance),M02: Logistic Regression,Credit Distress Out-of-Time,0.5754,0.0074
 Dataset 2 (UK Green Finance),M03: Random Forest Classifier,Credit Distress Out-of-Time,0.5833,0.0085
 Dataset 2 (UK Green Finance),M04: Extra Trees Classifier,Credit Distress Out-of-Time,0.6573,0.0098
 Dataset 2 (UK Green Finance),M05: Gradient Boosting Classifier,Credit Distress Out-of-Time,0.5903,0.0088

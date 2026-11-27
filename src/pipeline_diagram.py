@@ -12,10 +12,10 @@ import matplotlib.patches as patches
 def generate_pipeline_flowchart(output_path: str):
     """
     Draws a publication-quality end-to-end research methodology diagram:
-    Stage 1: Multi-Source Empirical Data Panels (Dataset 1, Dataset 2, Harmonized Panel)
+    Stage 1: Simulated Data Panels (Panel 1, Panel 2, Harmonized Panel)
     Stage 2: Strict Temporal Partitioning (Train, Conformal Calibration, Out-of-Time Test)
     Stage 3: 12-Model Multi-Paradigm Modeling Suite (Tabular, Uncertainty, Transformers)
-    Stage 4: Empirical Research Validation & Themes (Uncertainty, TreeSHAP, Distress, Greenwashing)
+    Stage 4: Research Validation (Uncertainty, TreeSHAP, Distress, Greenwashing)
     """
     fig, ax = plt.subplots(figsize=(20, 12), dpi=300)
     ax.set_xlim(0, 100)
@@ -92,10 +92,10 @@ def generate_pipeline_flowchart(output_path: str):
         ]),
         ("Harmonized Pooled Dataset (17,600 Obs)", [
             "• Unified Standardized Dimensionless Constructs",
-            "• Cross-Regime Empirical Benchmarking"
+            "• Cross-Regime Benchmarking"
         ])
     ]
-    draw_card(2.5, 6, 29, 84, c_data, c_data_border, "STAGE 1: DATA", "Multi-Source Empirical Panels", s1_sections)
+    draw_card(2.5, 6, 29, 84, c_data, c_data_border, "STAGE 1: DATA", "Simulated Panels", s1_sections)
 
     # Stage 2: Temporal Split (Top Center)
     s2_sections = [
@@ -148,7 +148,7 @@ def generate_pipeline_flowchart(output_path: str):
             "• Cross-market domain transfer penalty (0.5474 -> 0.3927)"
         ])
     ]
-    draw_card(68.5, 6, 29, 84, c_eval, c_eval_border, "STAGE 4: RESEARCH", "Empirical Research Validation", s4_sections)
+    draw_card(68.5, 6, 29, 84, c_eval, c_eval_border, "STAGE 4: RESEARCH", "Research Validation", s4_sections)
 
     # Directed Flow Arrows
     arrow_props = dict(facecolor="#1c2833", edgecolor="#1c2833", width=2.0, headwidth=7.5, shrink=0.04)

@@ -170,7 +170,7 @@ if __name__ == "__main__":
     train_d1 = df1[df1["year"] <= 2022]
     test_d1 = df1[df1["year"] > 2022]
     
-    m_d1 = xgb.XGBClassifier(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=42, n_jobs=-1)
+    m_d1 = xgb.XGBClassifier(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=42, n_jobs=1)
     m_d1.fit(train_d1[feats_d1], train_d1["financial_distress_t1"])
     _, imp_d1 = analyzer.compute_dataset_shap(m_d1, test_d1[feats_d1], feats_d1)
 
@@ -183,7 +183,7 @@ if __name__ == "__main__":
     train_d2 = df2[df2["year"] <= 2022]
     test_d2 = df2[df2["year"] > 2022]
 
-    m_d2 = xgb.XGBClassifier(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=42, n_jobs=-1)
+    m_d2 = xgb.XGBClassifier(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=42, n_jobs=1)
     m_d2.fit(train_d2[feats_d2], train_d2["credit_distress_t1"])
     _, imp_d2 = analyzer.compute_dataset_shap(m_d2, test_d2[feats_d2], feats_d2)
 

@@ -1,11 +1,11 @@
 """
 Multi-Model & Cross-Dataset Evaluation Engine
-Benchmarks 12 distinct machine learning architectures across 2 comprehensive datasets:
-- Dataset 1: Global Multi-Agency ESG & Financial Distress Panel (12,000 firm-years, 2018-2025)
-- Dataset 2: UK Green Finance & TCFD Climate Disclosures Panel (5,600 firm-years, 2019-2025)
+Benchmarks 8 tabular model families (M01-M08) on a regression and a classification task
+across 2 simulated panels:
+- Panel 1: multi-agency ESG & financial distress panel (12,000 firm-years, 2018-2025)
+- Panel 2: UK green finance & TCFD panel (5,600 firm-years, 2019-2025)
 
-Generates Figure 11 (Cross-Dataset 12-Model Comparative Benchmarks)
-and Figure 12 (Comprehensive Literature Taxonomy Matrix).
+Generates Figure 11 (cross-dataset model comparison) and Figure 12 (literature taxonomy matrix).
 """
 
 import os
@@ -31,7 +31,7 @@ import seaborn as sns
 
 class ComprehensiveTenModelBenchmarkSuite:
     """
-    Evaluates 12 distinct models across regression, classification, uncertainty, and NLP.
+    Evaluates eight model families (M01-M08) across regression, classification, uncertainty, and NLP.
     """
     def __init__(self, random_state: int = 42):
         self.random_state = random_state
@@ -39,22 +39,22 @@ class ComprehensiveTenModelBenchmarkSuite:
     def get_regression_models(self) -> Dict[str, object]:
         return {
             "M01: Ridge Regression": Ridge(alpha=1.0, random_state=self.random_state),
-            "M03: Random Forest": RandomForestRegressor(n_estimators=120, max_depth=8, random_state=self.random_state, n_jobs=-1),
-            "M04: Extra Trees": ExtraTreesRegressor(n_estimators=120, max_depth=8, random_state=self.random_state, n_jobs=-1),
+            "M03: Random Forest": RandomForestRegressor(n_estimators=120, max_depth=8, random_state=self.random_state, n_jobs=1),
+            "M04: Extra Trees": ExtraTreesRegressor(n_estimators=120, max_depth=8, random_state=self.random_state, n_jobs=1),
             "M05: Gradient Boosting (GBM)": GradientBoostingRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state),
-            "M06: XGBoost Regressor": xgb.XGBRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state, n_jobs=-1),
-            "M07: LightGBM Regressor": lgb.LGBMRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state, n_jobs=-1, verbose=-1),
+            "M06: XGBoost Regressor": xgb.XGBRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state, n_jobs=1),
+            "M07: LightGBM Regressor": lgb.LGBMRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state, n_jobs=1, verbose=-1),
             "M08: Deep Tabular MLP": MLPRegressor(hidden_layer_sizes=(64, 32), max_iter=300, random_state=self.random_state)
         }
 
     def get_classification_models(self) -> Dict[str, object]:
         return {
             "M02: Logistic Regression": LogisticRegression(max_iter=500, random_state=self.random_state),
-            "M03: Random Forest Classifier": RandomForestClassifier(n_estimators=120, max_depth=6, class_weight="balanced", random_state=self.random_state, n_jobs=-1),
-            "M04: Extra Trees Classifier": ExtraTreesClassifier(n_estimators=120, max_depth=6, class_weight="balanced", random_state=self.random_state, n_jobs=-1),
+            "M03: Random Forest Classifier": RandomForestClassifier(n_estimators=120, max_depth=6, class_weight="balanced", random_state=self.random_state, n_jobs=1),
+            "M04: Extra Trees Classifier": ExtraTreesClassifier(n_estimators=120, max_depth=6, class_weight="balanced", random_state=self.random_state, n_jobs=1),
             "M05: Gradient Boosting Classifier": GradientBoostingClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, random_state=self.random_state),
-            "M06: XGBoost Classifier": xgb.XGBClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, scale_pos_weight=3.0, random_state=self.random_state, n_jobs=-1),
-            "M07: LightGBM Classifier": lgb.LGBMClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, class_weight="balanced", random_state=self.random_state, n_jobs=-1, verbose=-1),
+            "M06: XGBoost Classifier": xgb.XGBClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, scale_pos_weight=3.0, random_state=self.random_state, n_jobs=1),
+            "M07: LightGBM Classifier": lgb.LGBMClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, class_weight="balanced", random_state=self.random_state, n_jobs=1, verbose=-1),
             "M08: Deep Tabular MLP Classifier": MLPClassifier(hidden_layer_sizes=(64, 32), max_iter=300, random_state=self.random_state)
         }
 
@@ -237,7 +237,7 @@ def plot_figure11_cross_dataset_comparison(
         ax4.annotate(f"{w:.3f}", (w, p.get_y() + p.get_height() / 2.),
                      ha="left", va="center", xytext=(5, 0), textcoords="offset points", fontsize=9.5)
 
-    plt.suptitle("Figure 11: Cross-Dataset Multi-Model Benchmarks (12 Models Evaluated Across 2 Empirical Datasets)", y=1.02, fontweight="bold", fontsize=15)
+    plt.suptitle("Figure 11: Cross-Dataset Model Benchmarks (8 Model Families Across 2 Simulated Panels)", y=1.02, fontweight="bold", fontsize=15)
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close()
