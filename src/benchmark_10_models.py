@@ -31,7 +31,7 @@ import seaborn as sns
 
 class ComprehensiveTenModelBenchmarkSuite:
     """
-    Evaluates 12 distinct models across regression, classification, uncertainty, and NLP.
+    Evaluates eight model families (M01-M08) across regression, classification, uncertainty, and NLP.
     """
     def __init__(self, random_state: int = 42):
         self.random_state = random_state

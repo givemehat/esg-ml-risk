@@ -5,6 +5,9 @@
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Status: Prototype](https://img.shields.io/badge/Status-Prototype%20Pipeline-orange.svg)]()
 
+**Authors:** Rajnish Singh, Medhavie Gupta, Katyayani Jaiswal *(Gautam Buddha University, Greater Noida)*
+**Academic guide:** Prof. Valentina Lagasio *(Sapienza University of Rome)*
+"oldString">
 **Authors:** Rajnish Singh, Medhavie Gupta, Katyayani Jaiswal *(Gautam Buddha University, Greater Noida)*, Prof. Valentina Lagasio *(Sapienza University of Rome)*
 
 ---
@@ -35,12 +38,12 @@ Four literature claims motivate the design:
 
 1. Cross-agency ESG ratings correlate weakly (Berg, Kölbel & Rigobon, 2022), injecting measurement noise into risk models.
 2. Standard ML studies report point predictions with no uncertainty statement (Avramov et al., 2022; Caprioli et al., 2024).
-3. Narrative disclosures drift from verified emissions and capital expenditure (Zhao et al., 2024; Calamai et al., 2025).
+3. Narrative disclosures drift from verified emissions and capital expenditure (Schimanski et al., 2024; Calamai et al., 2025).
 4. Random cross-validation inflates ESG performance; strict out-of-time evaluation shows headline scores add little over accounting ratios (Raza, Zaidi & Thalassinos, 2026).
 
 ## 2. Research Questions
 
-**RQ1 — Divergence, harmonization and risk.** How do agency methodologies and disclosure standards drive ESG rating divergence, and would common baselines compress it? The pipeline decomposes dispersion into measurement (56%), scope (38%) and weighting (6%) following Berg et al. (2022), then tests whether divergence and prediction intervals add signal to distress and spread models beyond accounting ratios.
+**RQ1 — Divergence, harmonization and risk.** How do agency methodologies and disclosure standards drive ESG rating divergence, and would common baselines compress it? The pipeline uses the Berg et al. (2022) taxonomy (measurement 56%, scope 38%, weighting 6%) as a design guide and tests whether divergence and prediction intervals add signal to distress and spread models beyond accounting ratios.
 
 **RQ2 — Narrative discrepancy detection.** Can transformer-based sentiment separate corporate rhetoric from audited environmental performance? The pipeline defines a Reporting Discrepancy Index (RDI) as the standardized gap between disclosure tone and audited performance, and benchmarks which information channels reproduce it. The transformer itself is not implemented yet — see [Section 10](#10-discrepancy-index-prototype-proxy).
 
@@ -62,11 +65,11 @@ Four literature claims motivate the design:
 | Regression target | `consensus_esg` (0–100) | `green_bond_spread_bps` (45–650 bps) |
 | Classification target | `financial_distress_t1` (69 positives, 0.58%) | `credit_distress_t1` (32 positives, 0.57%) |
 
-The generators are calibrated to reproduce three published properties rather than to imitate any single firm: inter-agency correlation ≈ 0.55–0.58, the 56/38/6 variance decomposition, and a weak ESG–distress relationship. Everything else is a modelling assumption.
+The generators are modelling assumptions, not calibrated reproductions: the realised inter-agency correlations are 0.61–0.66 (Berg et al., 2022 report 0.55–0.58); the 56/38/6 decomposition is a design taxonomy, not a reproduced variance share; and the ESG–distress link is deliberately weak. Everything else is an assumption.
 
 ![Figure 2: Simulated rating divergence](https://raw.githubusercontent.com/givemehat/esg-ml-risk/main/outputs/figures/figure2_rating_divergence.png)
 
-**Divergence in the generated panel:** Refinitiv–MSCI r = 0.55, Refinitiv–Sustainalytics r = 0.58, MSCI–Sustainalytics r = 0.57.
+**Divergence in the generated panel:** Refinitiv–MSCI r = 0.659, Refinitiv–Sustainalytics r = 0.630, MSCI–Sustainalytics r = 0.614 (n = 12,000 firm-years).
 
 ### Processed files
 
@@ -214,9 +217,10 @@ Zero-shot transfer collapses (0.39) because the two generators encode different 
 | :--- | :--- |
 | Berg, Kölbel & Rigobon (2022), *Review of Finance* — [doi](https://doi.org/10.1093/rof/rfac033) | 56/38/6 variance decomposition of rating divergence |
 | Lagasio et al. (2024), *IRFA* — [doi](https://doi.org/10.1016/j.irfa.2024.103742) | ESG-washing Severity Index (ESGSI) formulation |
-| Schimanski et al. (2021/24) — [arXiv:2110.12010](https://arxiv.org/abs/2110.12010) | ClimateBERT; talk-vs-walk framing |
+| Webersinke et al. (2021) — [arXiv:2110.12010](https://arxiv.org/abs/2110.12010) | ClimateBERT (DistilRoBERTa on climate text) |
+| Schimanski et al. (2024) — [doi](https://doi.org/10.1016/j.frl.2024.104979) | NLP quantification of ESG communication; talk-vs-walk framing |
 | Calamai et al. (2025) — [arXiv:2502.07541](https://arxiv.org/abs/2502.07541) | NLP greenwashing survey; task taxonomy |
-| Bank of England (2019/24) | Out-of-time distress validation standard |
+| Suss & Treitel (2019), Bank of England SWP No. 831 — [pdf](https://www.bankofengland.co.uk/working-paper/2019/predicting-bank-distress-in-the-uk-with-machine-learning) | Out-of-time distress validation standard |
 
 Eleven annotated PDFs and a longer taxonomy live in [`papers/`](papers/). Figure 12 maps the taxonomy:
 
@@ -284,10 +288,11 @@ Every run is seeded (`seed=42`) and deterministic; the committed metrics reprodu
 
 ## 15. Team and Contributions
 
+> Prof. Valentina Lagasio (Sapienza University of Rome) is the academic guide for this prototype; she is not listed as an author.
+
 | Author | Pillar | Modules | CRediT roles |
 | :--- | :--- | :--- | :--- |
 | **Rajnish Singh** — lead, GBU | Architecture, distress, uncertainty | `run_all.py`, `distress_eval.py`, `uncertainty.py`, `models_tabular.py` | Conceptualization, architecture, temporal evaluation, conformal prediction, repository |
-| **Prof. Valentina Lagasio** — Sapienza | Econometrics, ESGSI theory | theoretical framework | Conceptualization, supervision, ESGSI formulation, review & editing |
 | **Medhavie Gupta** — GBU | NLP and discrepancy index | `transformer_greenwash.py`, `nlp_greenwashing.py`, `esg_washing_deployment.py` | Text channels, discrepancy formulation, NLP benchmarks |
 | **Katyayani Jaiswal** — GBU | Explainability and harmonization | `explainability.py`, `cross_dataset_shap_analysis.py`, `benchmark_10_models.py` | TreeSHAP, cross-regime stability, pillar decomposition, hypothesis testing |
 

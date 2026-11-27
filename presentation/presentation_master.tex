@@ -105,10 +105,10 @@
     \begin{minipage}{0.95\textwidth}
       \tiny
       \begin{itemize}\setlength{\itemsep}{0pt}
-        \item FinBERT \& ClimateBERT fine-tuning
+        \item Text-channel proxies (FinBERT planned)
         \item Narrative tone \& vagueness extraction
         \item Discrepancy Index formulation
-        \item NLP empirical benchmarks
+        \item NLP proxy benchmarks
       \end{itemize}
     \end{minipage}
   \end{column}
@@ -131,8 +131,8 @@
   \end{column}
 \end{columns}
 \vspace{4pt}
-\begin{block}{\textbf{Co-Author \& Academic Advisor: Prof. Valentina Lagasio (Sapienza University of Rome)}}
-  \centering\footnotesize Associate Professor in Financial Markets and Institutions. Leading econometric grounding, ESGSI theoretical formulation (\emph{IRFA 2024}), financial markets validation, and academic supervision.
+\begin{block}{\textbf{Academic Guide \& Mentor: Prof. Valentina Lagasio (Sapienza University of Rome)}}
+  \centering\footnotesize Associate Professor in Financial Markets and Institutions. Guides the econometric framing, the ESGSI theory (\emph{IRFA 2024}) and the supervision of this prototype. Listed as academic guide, not as an author.
 \end{block}
 \end{frame}
 
@@ -163,7 +163,7 @@
   \end{column}
 \end{columns}
 \vspace{4pt}
-\takeaway{Rather than treating rating disagreement as an annoying error, our framework proves that **Disagreement + Greenwashing Discrepancy** serves as a vital early warning signal for financial insolvency.}
+\takeaway{Working hypothesis: disagreement plus the discrepancy index may be an early-warning signal. The prototype tests whether that link exists; in the simulated panel the two are essentially independent ($r = 0.015$).}
 \end{frame}
 
 % ------------------------------------------------------------
@@ -272,9 +272,11 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 \midrule
 \textbf{Prof. Valentina Lagasio} (2024) & \emph{Int. Review of Financial Analysis (IRFA)} & Formulated the \textbf{ESG-washing Severity Index (ESGSI)} across 749 listed firms using NLP tone analysis. \textbf{Foundational baseline for our thesis.} \\
 \addlinespace
-\textbf{Calamai et al.} (2025) & \emph{arXiv:2502.07541} & Comprehensive survey of 60+ AI papers; proved that lack of ground-truth requires multi-channel discrepancy modeling. \\
+\textbf{Calamai et al.} (2025) & \emph{arXiv:2502.07541} & Survey of 60+ AI papers; argues that lack of ground-truth requires multi-channel discrepancy modelling. \\
 \addlinespace
-\textbf{Schimanski, Leippold et al.} (2024) & \emph{ClimateBERT / Finance Research Letters} & Formulated the \textit{"Talk vs. Walk"} framework to audit corporate net-zero commitments with transformers. \\
+\textbf{Webersinke et al.} (2021) & \emph{arXiv:2110.12010} & ClimateBERT: DistilRoBERTa adapted to climate text. \\
+\addlinespace
+\textbf{Schimanski et al.} (2024) & \emph{Finance Research Letters} & \textit{"Bridging the gap in ESG measurement"}: NLP quantification of ESG communication; talk-vs-walk. \\
 \bottomrule
 \end{tabular}
 \end{frame}
@@ -290,7 +292,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 \midrule
 \textbf{Raza, Zaidi, Thalassinos} (2026) & \emph{European Research Studies Journal} & Strict out-of-time evaluation shows aggregate ESG scores do not predict default beyond financial ratios. \textbf{We replicate and extend this.} \\
 \addlinespace
-\textbf{Bank of England} (2019/2024) & \emph{Staff Working Paper No. 831} & Evaluated tree ensembles for UK bank distress under strict temporal validation to avoid look-ahead bias. \\
+\textbf{Suss \& Treitel} (2019) & \emph{Bank of England SWP No. 831} & UK bank distress early warning with ML under strict temporal validation. \\
 \addlinespace
 \textbf{Dossa et al.} (2025) & \emph{Innovation \& Green Development} & Showed that decomposing aggregate ESG into individual pillars (E, S, G) reveals hidden default risks. \\
 \bottomrule
@@ -342,7 +344,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
   \begin{itemize}\setlength{\itemsep}{1pt}
     \item Benchmark FinBERT / ClimateBERT against lexicons for disclosure tone extraction.
     \item Formulate an objective Discrepancy Index ($D_i$) between narrative tone and verified emissions.
-    \item Verify empirical correlation with agency disagreement and early-warning distress.
+    \item Test whether the index correlates with agency disagreement and distress on real data.
   \end{itemize}
 \end{exampleblock}
 \end{frame}
@@ -367,7 +369,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
       \begin{itemize}\setlength{\itemsep}{2pt}
         \item \textbf{Sample:} 1,500 global corporations (2018--2025).
         \item \textbf{Observations:} 12,000 firm-years across 8 sectors.
-        \item \textbf{Data Sources:} Orbis financial ratios, 3 divergent agency rating proxies, and unstructured CSR text.
+        \item \textbf{Data Sources:} Simulated financial ratios, 3 divergent agency rating proxies, and generated CSR text (seed = 42). No Orbis, Refinitiv, MSCI or Sustainalytics extract.
         \item \textbf{Regime:} Voluntary reporting regime (high divergence).
       \end{itemize}
     \end{block}
@@ -427,7 +429,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
   \begin{column}{0.54\textwidth}
     \centering
     \includegraphics[width=\textwidth,height=5.0cm,keepaspectratio]{images/figure11_cross_dataset_multi_model_benchmark.png}\\[2pt]
-    {\tiny\color{navy!60}Figure 11: 12-model comparative performance across regression and classification tasks.}
+    {\tiny\color{navy!60}Figure 11: Eight model families across regression and classification tasks.}
   \end{column}
 \end{columns}
 \end{frame}
@@ -442,7 +444,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
     \begin{itemize}\setlength{\itemsep}{3pt}
       \item Computed exact Shapley values using TreeSHAP to identify global feature importance.
       \item \textbf{Feature Attributions:} Carbon intensity ($24.8\%$) and ROA ($21.2\%$) dominate predictions.
-      \item \textbf{Cross-Regime Stability:} Spearman rank correlation reaches $\rho = 0.66$ ($p < 10^{-4}$) between voluntary and mandatory regimes.
+      \item \textbf{Cross-Regime Stability:} Spearman rank stability of TreeSHAP attributions $\rho = 0.6643$ ($p = 0.018$) between the two panels.
       \item Mandatory baselines significantly stabilize feature attribution consistency.
     \end{itemize}
   \end{column}
@@ -502,17 +504,17 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 % ------------------------------------------------------------
 % SLIDE 20: Link between Greenwashing and Agency Disagreement
 % ------------------------------------------------------------
-\begin{frame}[t]{Prototype Finding: Discrepancy Index Tracks Rating Disagreement}
+\begin{frame}[t]{Prototype Check: The Index Does Not Track Rating Dispersion Here}
 \small
-\begin{block}{\textbf{Statistical Verification of the Hypothesis}}
-  Is rating agency disagreement driven by corporate disclosure camouflage?
+\begin{block}{\textbf{What the generator actually encodes}}
+  The generator draws agency noise independently of firm integrity, so the discrepancy index and rating dispersion are not linked by construction.
   \begin{itemize}\setlength{\itemsep}{3pt}
-    \item \textbf{Pearson correlation:} $r = 0.443 \quad (p < 10^{-4})$ between the Greenwashing Discrepancy Index and Inter-Agency Rating Standard Deviation.
-    \item \textbf{Spearman rank correlation:} $\rho = 0.428 \quad (p < 10^{-4})$.
+    \item \textbf{Pearson correlation:} $r = 0.0146 \quad (p = 0.109)$ between the Greenwashing Discrepancy Index and Inter-Agency Rating Standard Deviation.
+    \item \textbf{Spearman rank correlation:} $\rho = 0.0097 \quad (p = 0.286)$.
   \end{itemize}
 \end{block}
 \vspace{4pt}
-\takeaway{When companies flood reports with vague, optimistic language without backing it up with verified carbon cuts, rating agencies interpret the signals differently, directly causing rating divergence!}
+\takeaway{The link between disclosure camouflage and rating divergence is a hypothesis to test on real data, not a result of this prototype.}
 \end{frame}
 
 % ------------------------------------------------------------
@@ -550,9 +552,9 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 \midrule
 \textbf{Rajnish Singh}\\ {\scriptsize Lead Author (GBU)} & \texttt{experiments/run\_all.py}\\\texttt{src/distress\_eval.py}\\\texttt{src/uncertainty.py} & Master architecture, strict out-of-time splits, Conformal prediction, M1-M5 models & Architecture \& Default Modeling (\textbf{\#3})\\
 \addlinespace
-\textbf{Prof. V. Lagasio}\\ {\scriptsize Co-Author (Sapienza)} & Econometric Framework \& ESGSI Validation & ESGSI econometric formulation, divergence taxonomy, journal positioning & Econometric Grounding \& Supervision\\
+\textbf{Prof. V. Lagasio}\\ {\scriptsize Academic Guide (Sapienza)} & Econometric Framework \& ESGSI Validation & ESGSI econometric formulation, divergence taxonomy, journal positioning & Econometric Grounding \& Guidance\\
 \addlinespace
-\textbf{Medhavie Gupta}\\ {\scriptsize Co-Author (GBU)} & \texttt{src/transformer\_greenwash.py}\\\texttt{src/nlp\_greenwashing.py}\\\texttt{src/esg\_washing\_deployment.py} & FinBERT/ClimateBERT inference, Tone extraction, Discrepancy index ($D_i$) & NLP \& Greenwashing Lead (\textbf{\#2})\\
+\textbf{Medhavie Gupta}\\ {\scriptsize Co-Author (GBU)} & \texttt{src/transformer\_greenwash.py}\\\texttt{src/nlp\_greenwashing.py}\\\texttt{src/esg\_washing\_deployment.py} & text-channel proxies, Tone extraction, Discrepancy index ($D_i$) & NLP \& Greenwashing Lead (\textbf{\#2})\\
 \addlinespace
 \textbf{Katyayani Jaiswal}\\ {\scriptsize Co-Author (GBU)} & \texttt{src/explainability.py}\\\texttt{src/cross\_dataset\_shap\_analysis.py}\\\texttt{src/benchmark\_10\_models.py} & TreeSHAP attributions, $\rho$ stability, E-S-G pillar decomposition & XAI \& Harmonization Lead (\textbf{\#1})\\
 \bottomrule
@@ -580,7 +582,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 \begin{itemize}\setlength{\itemsep}{4pt}
   \item \textbf{Satellite Emission Ground-Truth:} Integrate European Space Agency (Sentinel-5P) satellite atmospheric methane and CO$_2$ plumes with Vision Transformers to bypass self-reporting entirely.
   \item \textbf{Supply Chain Graph Transformers:} Deploy Graph Neural Networks (GNNs) across multi-tier vendor networks to audit Scope 3 outsourcing and carbon leakage.
-  \item \textbf{Causal Inference Frameworks:} Apply Do-Calculus and Instrumental Variables to prove that greenwashing exposure *causally drives* credit spread widening and liquidity contraction.
+  \item \textbf{Causal Inference Frameworks:} Apply Do-Calculus and Instrumental Variables to test whether greenwashing exposure drives credit spread widening and liquidity contraction.
   \item \textbf{Cross-Jurisdictional Regulations:} Extend empirical benchmarks to European CSRD/EFRAG standards, US SEC Climate Mandates, and Indian SEBI BRSR filings.
 \end{itemize}
 \end{frame}
@@ -597,7 +599,8 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
   \item \textbf{Christensen, D. M., Serafeim, G., \& Sikochi, A. (2022).} Why is corporate virtue in the eye of the beholder? \emph{Journal of Accounting and Economics}, 73(1), 101456. DOI: \href{https://doi.org/10.1016/j.jacceco.2021.101456}{10.1016/j.jacceco.2021.101456}
   \item \textbf{Lagasio, V. (2024).} ESG-washing detection in corporate sustainability reports. \emph{International Review of Financial Analysis}, 96, 103742. DOI: \href{https://doi.org/10.1016/j.irfa.2024.103742}{10.1016/j.irfa.2024.103742}
   \item \textbf{Raza, M. W., Zaidi, S. A. H., \& Thalassinos, E. (2026).} Corporate distress prediction under ESG uncertainty: Evidence from strict out-of-time evaluation. \emph{European Research Studies Journal}.
-  \item \textbf{Schimanski, T., et al. (2024).} Detecting Greenwashing in Environmental Disclosures using NLP. \emph{Financial Research Letters}.
+  \item \textbf{Webersinke, N., et al. (2021).} ClimateBERT: A Pretrained Language Model for Climate-Related Text. \emph{arXiv:2110.12010}.
+  \item \textbf{Schimanski, T., et al. (2024).} Bridging the gap in ESG measurement. \emph{Finance Research Letters}. DOI: \href{https://doi.org/10.1016/j.frl.2024.104979}{10.1016/j.frl.2024.104979}
 \end{enumerate}
 \vspace{6pt}
 \centering\small\textbf{Thank You! Questions \& Feedback Welcome.}
