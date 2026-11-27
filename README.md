@@ -12,6 +12,13 @@
 > *Associate Professor in Financial Markets and Institutions, Department of Management, Sapienza University of Rome*  
 > **Meeting and Presentation Date:** 20 November 2026
 
+> [!TIP]
+> **Academic Presentation Deck & Overleaf Package Available:**  
+> A complete 25-slide HD Beamer presentation (`presentation/presentation_master.tex`) with embedded figures, comparative tables, and a 1-click Overleaf archive (`presentation/presentation_deck.zip`) is included in the [`presentation/`](presentation/) directory.
+
+**Quick Navigation:**  
+[Core Questions](#core-research-scope-and-primary-questions) • [Architecture](#2-research-architecture-and-methodology-flowchart) • [Divergence Analysis](#3-empirical-analysis-of-multi-agency-esg-rating-divergence) • [Datasets](#4-the-two-empirical-datasets) • [12-Model Benchmarks](#5-comprehensive-12-model-benchmarking-suite) • [Conformal Uncertainty](#7-predictive-uncertainty-quantification-research-question-1) • [Greenwashing NLP](#10-corporate-greenwashing-detection-and-transformer-deployment) • [Literature](#12-theoretical-taxonomy-literature-matrix--benchmark-papers) • [Team Roles](#15-research-team-and-author-contribution-breakdown)
+
 ---
 
 ## 1. Executive Summary and Research Motivation
@@ -29,16 +36,16 @@ This project provides an end-to-end empirical Machine Learning, Uncertainty Quan
 
 The empirical investigation is structured around two central research questions:
 
-> #### **Primary Research Question 1 (Rating Divergence, Harmonization & Risk Assessment):**
+> [!IMPORTANT]
+> ### Primary Research Question 1 (Rating Divergence, Harmonization & Risk Assessment)
 > **How do differences in rating agency methodologies and disclosure standards drive ESG rating divergence, and how would aligning ratings around common reporting frameworks or standardized baselines affect rating consistency and financial risk assessment?**
 >
 > - **Decomposition & Mechanism:** We deconstruct cross-agency dispersion across three leading rating agencies (Refinitiv, MSCI, Sustainalytics proxies) into measurement noise (56%), scope definitions (38%), and weightings (6%) following Berg et al. (2022).
 > - **Standardized Baselines & Harmonization:** We evaluate whether shifting from voluntary disclosure regimes to mandatory, audited baselines (e.g., UK SECR audited carbon intensity and statutory TCFD filings) compresses rating divergence and stabilizes TreeSHAP feature attributions across cross-market transfer ($R^2 = 0.812$).
 > - **Downstream Financial Risk Assessment:** We test whether rating divergence and prediction intervals provide statistically significant incremental signals for out-of-time green bond credit spreads and Altman-Z financial distress classification beyond traditional financial accounting ratios.
 
----
-
-> #### **Primary Research Question 2 (Transformer NLP & ESG-Washing Discrepancy Detection):**
+> [!IMPORTANT]
+> ### Primary Research Question 2 (Transformer NLP & ESG-Washing Discrepancy Detection)
 > **How can state-of-the-art transformer models (like BERT) and sentiment analysis be deployed to detect corporate ESG-washing and evaluate reporting discrepancies?**
 >
 > - **Transformer Architecture & Sentiment Polarity:** We fine-tune and benchmark domain-adapted contextual transformers (`ProsusAI/finbert` and `climatebert/distilroberta-base-climate-sentiment`) against classical bag-of-words (Loughran-McDonald, TF-IDF) on sustainability disclosures, achieving **88.4% sentiment classification accuracy** and superior detection of optimistic narrative obfuscation.
@@ -173,7 +180,7 @@ Twelve distinct model architectures were benchmarked across regression, classifi
    - *Role in Study:* Captures non-linear cross-pillar feature interactions in bankruptcy prediction (Liu, Li, and Yu, 2025).
 9. **Model 9: Quantile Gradient Boosted Trees (p10, p50, p90)**
    - *Mathematical Formulation:* Pinball loss optimization $\rho_\tau(u) = u(\tau - \mathbb{I}(u < 0))$.
-   - *Role in Study:* Quantifies non-parametric 80% prediction intervals $p10 to p90 prediction interval$ (Caprioli et al., 2024).
+   - *Role in Study:* Quantifies non-parametric 80% prediction intervals ($p_{10}$ to $p_{90}$) (Caprioli et al., 2024).
 10. **Model 10: Inductive Split Conformal Prediction**
     - *Mathematical Formulation:* $q_{\text{cal}} = \text{Quantile}(|y_i - \hat{y}_i|, \lceil (1-\alpha)(n+1)\rceil/n)$.
     - *Role in Study:* Provides distribution-free, finite-sample valid 90% coverage guarantees on unseen test data without Gaussian assumptions.
@@ -296,7 +303,10 @@ Stepwise feature expansions were tested on out-of-time financial distress events
 | **M5: Full Model (+ Greenwashing Gap)** | 13 | 0.5289 | $-0.0783$ | 0.0064 |
 
 ### Empirical Insights on Insolvency Prediction:
-Consistent with Raza et al. (2026), composite ESG ratings do not improve headline default prediction over standard financial accounting ratios (Altman Z, leverage, ROA). However, decomposing ratings into granular individual pillars (M3) and isolating the greenwashing gap preserves superior Precision-Recall (PR-AUC = 0.0079), proving that unmasking disclosure inflation is necessary for downside tail risk control.
+
+> [!NOTE]
+> **Key Finding on Financial Distress & Downside Tail Risk:**  
+> Consistent with Raza et al. (2026), composite headline ESG ratings do not improve default prediction over standard financial accounting ratios (Altman Z, leverage, ROA). However, decomposing ratings into granular individual pillars (M3) and isolating the **Greenwashing Discrepancy Gap** preserves superior Precision-Recall (**PR-AUC = 0.0079**, a $+38\%$ lift), demonstrating that unmasking disclosure inflation is essential for tail risk mitigation.
 
 ---
 
@@ -332,6 +342,10 @@ $$
 | **2. ESG Lexicon Tone Only** | 0.9403 | 0.7650 | 91.40% | Blind to physical environmental performance |
 | **3. FinBERT Sentiment Classifier** | 0.9526 | 0.7636 | 91.00% | Captures syntax but ungrounded in physical reality |
 | **4. Dual-Channel Transformer Discrepancy** | **0.9982** | **0.9481** | **97.89%** | Grounded in audited carbon emissions reality |
+
+> [!NOTE]
+> **Key Finding on Transformer Greenwashing Detection:**  
+> The Dual-Channel Transformer Discrepancy architecture achieves an out-of-time **99.82% ROC-AUC** and **0.9481 F1-score**, proving that pairing domain-adapted FinBERT narrative polarity with audited physical emissions resolves corporate vocabulary manipulation. Furthermore, the Greenwashing Discrepancy Index ($RDI$) correlates strongly with inter-agency rating disagreement ($r = 0.443, p < 10^{-4}$), demonstrating that narrative obfuscation directly drives rating agency confusion.
 
 ---
 
@@ -372,7 +386,7 @@ Variables were harmonized into dimensionless standardized constructs (`harm_scal
 | **Berg, Kölbel, & Rigobon** *(MIT Sloan)* | *Aggregate Confusion: The Divergence of ESG Ratings* | 2022 | Mathematical taxonomy decomposing rating agency divergence into Measurement (56%), Scope (38%), and Weight (6%), establishing why individual agency ratings inject noise into risk models. | [Review of Finance](https://doi.org/10.1093/rof/rfac033) |
 | **Bank of England / Oxford** | *Predicting Bank Distress in the UK with Machine Learning* | 2019/24 | Establishes the empirical gold standard for corporate financial distress forecasting under strict out-of-time temporal validation to prevent look-ahead bias and data leakage. | [BoE Working Paper](https://www.bankofengland.co.uk/working-paper/2019/predicting-bank-distress-in-the-uk-with-machine-learning) |
 
-*Full PDF library available in the repository at [`papers/`](file:///Users/rajnishsingh/Downloads/ESG_RESEARCH/papers/).*
+*Full PDF library available in the repository at [`papers/`](papers/).*
 
 ---
 
@@ -390,8 +404,10 @@ esg-ml-risk/
 │   ├── Webersinke_2021_ClimateBERT.pdf
 │   └── ... (11 foundational papers)
 ├── presentation/                              # Conference & meeting presentation slides
-│   ├── presentation_20nov.tex                 # Beamer LaTeX source
-│   └── presentation_20nov.pdf                 # Compiled slide deck
+│   ├── presentation_master.tex                # 25-slide Master Beamer LaTeX source
+│   ├── presentation_20nov.tex                 # Preliminary meeting slides
+│   ├── presentation_deck.zip                  # 1-Click Overleaf upload package
+│   └── images/                                # High-res presentation graphics & author photos
 ├── data/
 │   ├── raw/                                   # Raw input data
 │   └── processed/                             # Processed research datasets
@@ -408,18 +424,6 @@ esg-ml-risk/
 │   ├── distress_eval.py                       # Incremental financial distress modeling (M1-M5)
 │   ├── nlp_greenwashing.py                    # Lexical and vagueness density scoring
 │   ├── transformer_greenwash.py               # Transformer self-attention text encoder
-│   ├── esg_washing_deployment.py              # Dual-channel discrepancy deployment engine
-│   ├── benchmark_10_models.py                 # Multi-model cross-dataset benchmarking suite
-│   ├── cross_dataset_shap_analysis.py         # Comparative SHAP, harmonization, domain transfer
-│   ├── visualize.py                           # Publication chart generation engine
-│   └── pipeline_diagram.py                    # Architecture flowchart generator
-├── experiments/
-│   ├── run_all.py                             # Master execution pipeline
-│   └── generate_figures.py                    # Standalone figure reproduction
-└── outputs/
-    ├── metrics/                               # Empirical CSV and JSON metric tables
-    └── figures/                               # 14 publication figures (300 DPI)
-```
 │   ├── esg_washing_deployment.py              # Dual-channel discrepancy deployment engine
 │   ├── benchmark_10_models.py                 # Multi-model cross-dataset benchmarking suite
 │   ├── cross_dataset_shap_analysis.py         # Comparative SHAP, harmonization, domain transfer
