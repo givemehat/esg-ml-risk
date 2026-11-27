@@ -183,7 +183,7 @@
   \begin{column}{0.46\textwidth}
     \centering
     \includegraphics[width=\textwidth,height=4.8cm,keepaspectratio]{images/figure2_rating_divergence.png}\\[2pt]
-    {\tiny\color{navy!60}Figure 2: Empirical rating dispersion across 1,500 global firms.}
+    {\tiny\color{navy!60}Figure 2: Simulated rating dispersion across 1,500 generated firms.}
   \end{column}
 \end{columns}
 \end{frame}
@@ -238,7 +238,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
   \begin{column}{0.46\textwidth}
     \centering
     \includegraphics[width=\textwidth,height=4.8cm,keepaspectratio]{images/figure6_greenwashing_matrix.png}\\[2pt]
-    {\tiny\color{navy!60}Figure 6: Empirical distribution of corporate greenwashing discrepancy.}
+    {\tiny\color{navy!60}Figure 6: Simulated distribution of the reporting discrepancy index.}
   \end{column}
 \end{columns}
 \end{frame}
@@ -350,16 +350,16 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 % ------------------------------------------------------------
 % SLIDE 13: System Architecture Flowchart
 % ------------------------------------------------------------
-\begin{frame}[t]{System Architecture & Empirical Methodology}
+\begin{frame}[t]{System Architecture & Methodology}
 \centering
 \includegraphics[width=0.96\textwidth,height=6.2cm,keepaspectratio]{images/figure1_research_architecture_flowchart.png}\\[2pt]
-{\tiny\color{navy!60}Figure 1: End-to-end 4-stage empirical research pipeline with strict temporal validation.}
+{\tiny\color{navy!60}Figure 1: End-to-end 4-stage prototype pipeline with strict temporal validation.}
 \end{frame}
 
 % ------------------------------------------------------------
 % SLIDE 14: Empirical Panels
 % ------------------------------------------------------------
-\begin{frame}[t]{The Two Empirical Datasets (17,600 Firm-Years)}
+\begin{frame}[t]{The Two Simulated Panels (17,600 Firm-Years)}
 \small
 \begin{columns}[T]
   \begin{column}{0.48\textwidth}
@@ -414,14 +414,14 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 % ------------------------------------------------------------
 % SLIDE 16: 12-Model Benchmarking Across Regimes
 % ------------------------------------------------------------
-\begin{frame}[t]{12-Model Multi-Dataset Empirical Benchmark}
+\begin{frame}[t]{Model Benchmark Across Two Simulated Panels}
 \small
 \begin{columns}[T]
   \begin{column}{0.44\textwidth}
     \begin{itemize}\setlength{\itemsep}{3pt}
-      \item Benchmarked 12 architectures: OLS, Ridge, Lasso, ElasticNet, Random Forest, Extra Trees, Gradient Boosting, LightGBM, XGBoost, CatBoost, MLP, and Conformal QR.
-      \item \textbf{Top Performer:} LightGBM and CatBoost achieve test $R^2 = 0.812$ and RMSE $= 4.88$.
-      \item Tree ensembles outperform linear baselines by \textbf{$+28\%$ in explained variance}.
+      \item Benchmarked 8 families: Ridge, Logistic, Random Forest, Extra Trees, Gradient Boosting, XGBoost, LightGBM, MLP, plus quantile and conformal intervals.
+      \item \textbf{Top performers:} Ridge and MLP at $R^2 = 0.8365$ (RMSE $= 4.79$); LightGBM $0.8322$ (RMSE $= 4.85$).
+      \item \textbf{No ensemble advantage:} every model sits within $0.006$ $R^2$ of Ridge on this panel.
     \end{itemize}
   \end{column}
   \begin{column}{0.54\textwidth}
@@ -462,10 +462,10 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 \begin{columns}[T]
   \begin{column}{0.46\textwidth}
     \begin{itemize}\setlength{\itemsep}{3pt}
-      \item Fine-tuned domain-specific transformers: \texttt{ProsusAI/finbert} and \texttt{climatebert}.
-      \item Tested against Classical TF-IDF + Ridge and Loughran-McDonald dictionary.
-      \item \textbf{Results:} FinBERT achieves \textbf{88.4\% accuracy} and \textbf{0.881 F1-score} (vs.\ 64.2\% for TF-IDF).
-      \item Effectively detects optimistic narrative camouflage, forward-looking statements, and greenwashing tone.
+      \item \textbf{Prototype status:} no transformer is trained yet. The text channels are pre-computed numeric columns from the generator.
+      \item Planned: fine-tune \texttt{ProsusAI/finbert} and \texttt{climatebert} against TF-IDF and Loughran-McDonald baselines.
+      \item Current benchmark uses logistic regression on the text channels, so the reported AUCs are a channel decomposition, not detection performance.
+      \item Target for the empirical stage: contextual models should beat lexicons on tone inflation and forward-looking vagueness.
     \end{itemize}
   \end{column}
   \begin{column}{0.52\textwidth}
@@ -488,7 +488,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
     \begin{itemize}\setlength{\itemsep}{2pt}
       \item \textbf{Channel 1 (Talk):} FinBERT positive sentiment polarity and forward-looking commitment density.
       \item \textbf{Channel 2 (Walk):} Audited Scope 1/2 GHG reduction rate and green CapEx allocation.
-      \item \textbf{Anomaly Benchmark:} Achieves \textbf{99.82\% ROC-AUC} in isolating greenwashing anomalies.
+      \item \textbf{Prototype benchmark:} 0.998 ROC-AUC, but the label is the index itself --- an internal consistency check, not anomaly detection.
     \end{itemize}
   \end{column}
   \begin{column}{0.48\textwidth}
@@ -502,7 +502,7 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 % ------------------------------------------------------------
 % SLIDE 20: Link between Greenwashing and Agency Disagreement
 % ------------------------------------------------------------
-\begin{frame}[t]{Empirical Finding: Greenwashing Drives Rating Disagreement}
+\begin{frame}[t]{Prototype Finding: Discrepancy Index Tracks Rating Disagreement}
 \small
 \begin{block}{\textbf{Statistical Verification of the Hypothesis}}
   Is rating agency disagreement driven by corporate disclosure camouflage?
@@ -524,11 +524,11 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
   \begin{column}{0.48\textwidth}
     \textbf{Stepwise Model Specifications (M1 to M5):}
     \begin{itemize}\setlength{\itemsep}{2pt}
-      \item \textbf{M1 (Financials Only):} ROC-AUC $= 0.781$
-      \item \textbf{M2 (+ Headline ESG):} ROC-AUC $= 0.784$ ($\Delta = +0.003$, not significant)
-      \item \textbf{M3 (+ Individual Pillars):} ROC-AUC $= 0.792$
-      \item \textbf{M4 (+ Rating Disagreement):} ROC-AUC $= 0.805$ ($\Delta = +0.024$, $p < 0.05$)
-      \item \textbf{M5 (Full Model + Greenwashing Gap):} ROC-AUC $= \mathbf{0.812}$, PR-AUC improves by \textbf{$+38\%$}.
+      \item \textbf{M1 (Financials Only):} ROC-AUC $= \mathbf{0.6073}$, PR-AUC $0.0068$ --- best ROC of the five.
+      \item \textbf{M2 (+ Headline ESG):} ROC-AUC $= 0.5784$ ($\Delta = -0.029$)
+      \item \textbf{M3 (+ Individual Pillars):} ROC-AUC $= 0.5981$, PR-AUC $\mathbf{0.0079}$ ($+16.2\%$ vs M1)
+      \item \textbf{M4 (+ Rating Disagreement):} ROC-AUC $= 0.5163$ ($\Delta = -0.091$)
+      \item \textbf{M5 (Full Model + Greenwashing Gap):} ROC-AUC $= 0.5289$; 21 positive test events, so treat all gaps as indicative.
     \end{itemize}
   \end{column}
   \begin{column}{0.48\textwidth}
@@ -566,9 +566,9 @@ Following the mathematical variance decomposition established by \textbf{Berg, K
 \small
 \begin{enumerate}\setlength{\itemsep}{4pt}
   \item \textbf{Divergence is Informative:} Inter-agency rating disagreement is not merely noise; it reflects corporate reporting opacity and serves as a strong signal of downside volatility.
-  \item \textbf{Common Baselines Restore Stability:} Transitioning to statutory reporting (UK SECR/TCFD) compresses rating variance and boosts cross-domain transferability ($R^2 = 0.812$).
-  \item \textbf{Transformers Unmask Greenwashing:} Fine-tuned contextual language models (FinBERT) achieve 88.4\% accuracy in detecting tone inflation, correlating with rating divergence ($r = 0.443$).
-  \item \textbf{Tail Risk Protection:} While aggregate ESG scores fail to predict future corporate defaults, incorporating the **Greenwashing Discrepancy Index** yields a statistically significant $+38\%$ boost in PR-AUC default detection.
+  \item \textbf{Regime Shift Matters:} Cross-regime transfer collapses to 0.39 ROC-AUC zero-shot and recovers to ~0.49 pooled, so harmonization buys stability, not accuracy.
+  \item \textbf{Text Channels Rank Clearly:} Tone dominates vagueness in reproducing the discrepancy index; transformer fine-tuning is the next step, not a completed result.
+  \item \textbf{Headline ESG Adds Little:} Aggregate scores do not improve distress prediction; the pillar decomposition gives only a $+16.2\%$ PR-AUC lift on 21 positive events.
 \end{enumerate}
 \end{frame}
 

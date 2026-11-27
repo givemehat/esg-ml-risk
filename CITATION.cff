@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this prototype pipeline, please cite it as below."
+title: "Machine Learning for ESG Assessment and Financial Risk: A Prototype Pipeline"
+abstract: >-
+  Prototype research pipeline for multi-agency ESG rating divergence,
+  out-of-time financial distress prediction, conformal uncertainty
+  quantification, TreeSHAP stability, and a narrative-vs-performance
+  discrepancy index. All panels are simulated; results are pipeline
+  validation, not empirical findings.
+type: software
+license: MIT
+version: 0.1.0
+date-released: 2026-11-27
+repository-code: "https://github.com/givemehat/esg-ml-risk"
+keywords:
+  - esg
+  - sustainable-finance
+  - conformal-prediction
+  - greenwashing
+  - financial-risk
+  - machine-learning
+authors:
+  - family-names: Singh
+    given-names: Rajnish
+    affiliation: "Gautam Buddha University, Greater Noida, India"
+    orcid: ""
+  - family-names: Gupta
+    given-names: Medhavie
+    affiliation: "Gautam Buddha University, Greater Noida, India"
+  - family-names: Jaiswal
+    given-names: Katyayani
+    affiliation: "Gautam Buddha University, Greater Noida, India"
+  - family-names: Lagasio
+    given-names: Valentina
+    affiliation: "Sapienza University of Rome, Italy"
