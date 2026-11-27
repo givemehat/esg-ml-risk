@@ -147,8 +147,8 @@ Both methods undercover by 3–4 points, which is the expected finite-sample beh
 
 TreeSHAP attributions computed on two disjoint windows (2018–2020 vs 2021–2022):
 
-- Spearman rank correlation between windows: **ρ = 0.6643** (p = 0.018)
-- Cosine similarity of mean attributions: **0.9886**
+- Spearman rank correlation between windows: **ρ = 0.7483** (p = 0.005)
+- Cosine similarity of mean attributions: **0.9934**
 - Consistently important features: `leverage`, `log_assets`, `pillar_g`
 
 Cosine similarity stays high while rank correlation drops, which means the same features dominate but their ordering shuffles between windows — the practical warning for anyone reading a single-window SHAP plot.
@@ -284,7 +284,7 @@ python src/benchmark_10_models.py                 # figures 11-12, cross-panel b
 python src/cross_dataset_shap_analysis.py         # figures 13-14, harmonization
 ```
 
-Every run is seeded (`seed=42`) and deterministic; the committed metrics reproduce exactly on the versions listed in `requirements.txt`.
+Every run is seeded (`seed=42`) and deterministic; the committed metrics reproduce exactly on the versions listed in `requirements.txt`. All scikit-learn/XGBoost/LightGBM fits use `n_jobs=1` so results do not depend on machine core count; the torch step sets `OMP_NUM_THREADS=1` to avoid the macOS segfault.
 
 ## 15. Team and Contributions
 

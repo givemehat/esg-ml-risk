@@ -38,19 +38,19 @@ class TabularESGModelSuite:
     def _init_regressors(self) -> Dict[str, Any]:
         return {
             "Ridge Baseline": Ridge(alpha=1.0, random_state=self.random_state),
-            "Random Forest": RandomForestRegressor(n_estimators=150, max_depth=10, random_state=self.random_state, n_jobs=-1),
-            "Extra Trees": ExtraTreesRegressor(n_estimators=150, max_depth=10, random_state=self.random_state, n_jobs=-1),
-            "XGBoost": xgb.XGBRegressor(n_estimators=150, max_depth=5, learning_rate=0.05, random_state=self.random_state, n_jobs=-1),
-            "LightGBM": lgb.LGBMRegressor(n_estimators=150, max_depth=5, learning_rate=0.05, random_state=self.random_state, n_jobs=-1, verbose=-1)
+            "Random Forest": RandomForestRegressor(n_estimators=150, max_depth=10, random_state=self.random_state, n_jobs=1),
+            "Extra Trees": ExtraTreesRegressor(n_estimators=150, max_depth=10, random_state=self.random_state, n_jobs=1),
+            "XGBoost": xgb.XGBRegressor(n_estimators=150, max_depth=5, learning_rate=0.05, random_state=self.random_state, n_jobs=1),
+            "LightGBM": lgb.LGBMRegressor(n_estimators=150, max_depth=5, learning_rate=0.05, random_state=self.random_state, n_jobs=1, verbose=-1)
         }
 
     def _init_classifiers(self) -> Dict[str, Any]:
         return {
             "Logistic Regression": LogisticRegression(max_iter=1000, random_state=self.random_state),
-            "Random Forest": RandomForestClassifier(n_estimators=150, max_depth=8, class_weight="balanced", random_state=self.random_state, n_jobs=-1),
-            "Extra Trees": ExtraTreesClassifier(n_estimators=150, max_depth=8, class_weight="balanced", random_state=self.random_state, n_jobs=-1),
-            "XGBoost": xgb.XGBClassifier(n_estimators=150, max_depth=4, learning_rate=0.05, scale_pos_weight=3.0, random_state=self.random_state, n_jobs=-1),
-            "LightGBM": lgb.LGBMClassifier(n_estimators=150, max_depth=4, learning_rate=0.05, class_weight="balanced", random_state=self.random_state, n_jobs=-1, verbose=-1)
+            "Random Forest": RandomForestClassifier(n_estimators=150, max_depth=8, class_weight="balanced", random_state=self.random_state, n_jobs=1),
+            "Extra Trees": ExtraTreesClassifier(n_estimators=150, max_depth=8, class_weight="balanced", random_state=self.random_state, n_jobs=1),
+            "XGBoost": xgb.XGBClassifier(n_estimators=150, max_depth=4, learning_rate=0.05, scale_pos_weight=3.0, random_state=self.random_state, n_jobs=1),
+            "LightGBM": lgb.LGBMClassifier(n_estimators=150, max_depth=4, learning_rate=0.05, class_weight="balanced", random_state=self.random_state, n_jobs=1, verbose=-1)
         }
 
     def train_evaluate_regression(

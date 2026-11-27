@@ -39,22 +39,22 @@ class ComprehensiveTenModelBenchmarkSuite:
     def get_regression_models(self) -> Dict[str, object]:
         return {
             "M01: Ridge Regression": Ridge(alpha=1.0, random_state=self.random_state),
-            "M03: Random Forest": RandomForestRegressor(n_estimators=120, max_depth=8, random_state=self.random_state, n_jobs=-1),
-            "M04: Extra Trees": ExtraTreesRegressor(n_estimators=120, max_depth=8, random_state=self.random_state, n_jobs=-1),
+            "M03: Random Forest": RandomForestRegressor(n_estimators=120, max_depth=8, random_state=self.random_state, n_jobs=1),
+            "M04: Extra Trees": ExtraTreesRegressor(n_estimators=120, max_depth=8, random_state=self.random_state, n_jobs=1),
             "M05: Gradient Boosting (GBM)": GradientBoostingRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state),
-            "M06: XGBoost Regressor": xgb.XGBRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state, n_jobs=-1),
-            "M07: LightGBM Regressor": lgb.LGBMRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state, n_jobs=-1, verbose=-1),
+            "M06: XGBoost Regressor": xgb.XGBRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state, n_jobs=1),
+            "M07: LightGBM Regressor": lgb.LGBMRegressor(n_estimators=120, max_depth=4, learning_rate=0.05, random_state=self.random_state, n_jobs=1, verbose=-1),
             "M08: Deep Tabular MLP": MLPRegressor(hidden_layer_sizes=(64, 32), max_iter=300, random_state=self.random_state)
         }
 
     def get_classification_models(self) -> Dict[str, object]:
         return {
             "M02: Logistic Regression": LogisticRegression(max_iter=500, random_state=self.random_state),
-            "M03: Random Forest Classifier": RandomForestClassifier(n_estimators=120, max_depth=6, class_weight="balanced", random_state=self.random_state, n_jobs=-1),
-            "M04: Extra Trees Classifier": ExtraTreesClassifier(n_estimators=120, max_depth=6, class_weight="balanced", random_state=self.random_state, n_jobs=-1),
+            "M03: Random Forest Classifier": RandomForestClassifier(n_estimators=120, max_depth=6, class_weight="balanced", random_state=self.random_state, n_jobs=1),
+            "M04: Extra Trees Classifier": ExtraTreesClassifier(n_estimators=120, max_depth=6, class_weight="balanced", random_state=self.random_state, n_jobs=1),
             "M05: Gradient Boosting Classifier": GradientBoostingClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, random_state=self.random_state),
-            "M06: XGBoost Classifier": xgb.XGBClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, scale_pos_weight=3.0, random_state=self.random_state, n_jobs=-1),
-            "M07: LightGBM Classifier": lgb.LGBMClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, class_weight="balanced", random_state=self.random_state, n_jobs=-1, verbose=-1),
+            "M06: XGBoost Classifier": xgb.XGBClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, scale_pos_weight=3.0, random_state=self.random_state, n_jobs=1),
+            "M07: LightGBM Classifier": lgb.LGBMClassifier(n_estimators=120, max_depth=3, learning_rate=0.05, class_weight="balanced", random_state=self.random_state, n_jobs=1, verbose=-1),
             "M08: Deep Tabular MLP Classifier": MLPClassifier(hidden_layer_sizes=(64, 32), max_iter=300, random_state=self.random_state)
         }
 

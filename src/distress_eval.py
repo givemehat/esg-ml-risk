@@ -78,7 +78,7 @@ class FinancialDistressEvaluator:
                 model = xgb.XGBClassifier(
                     n_estimators=150, max_depth=4, learning_rate=0.05,
                     scale_pos_weight=3.0, random_state=self.random_state,
-                    n_jobs=-1
+                    n_jobs=1
                 )
 
             model.fit(X_train, y_train)
