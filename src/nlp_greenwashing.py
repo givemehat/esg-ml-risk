@@ -8,6 +8,9 @@ import re
 import numpy as np
 import pandas as pd
 from typing import Dict, List, Tuple
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 class ESGGreenwashingAnalyzer:
     """
@@ -105,6 +108,6 @@ if __name__ == "__main__":
     text_feats = analyzer.extract_text_features(df["csr_disclosure"].tolist())
     corr_results = analyzer.test_greenwashing_disagreement_correlation(df)
     
-    print("NLP Greenwashing Extraction complete:")
-    print(text_feats.head())
-    print(f"RQ4 Correlation (Greenwashing Gap vs Rating Disagreement): {corr_results}")
+    logger.info("NLP Greenwashing Extraction complete:")
+    logger.info(text_feats.head())
+    logger.info(f"RQ4 Correlation (Greenwashing Gap vs Rating Disagreement): {corr_results}")

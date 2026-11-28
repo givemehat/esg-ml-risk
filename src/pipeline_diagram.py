@@ -8,6 +8,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 def generate_pipeline_flowchart(output_path: str):
     """
@@ -173,4 +176,4 @@ if __name__ == "__main__":
     os.makedirs(out_dir, exist_ok=True)
     target_path = os.path.join(out_dir, "figure1_research_architecture_flowchart.png")
     generate_pipeline_flowchart(target_path)
-    print("Updated figure 1 saved to:", target_path)
+    logger.info("Updated figure 1 saved to:", target_path)

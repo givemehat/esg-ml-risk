@@ -10,6 +10,9 @@ import os
 import numpy as np
 import pandas as pd
 from typing import Tuple
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 def generate_uk_green_finance_dataset(
     n_firms: int = 800,
@@ -151,9 +154,9 @@ if __name__ == "__main__":
     out_dir = os.path.join(base_dir, "data", "processed")
     os.makedirs(out_dir, exist_ok=True)
     
-    print("Generating Dataset 2: UK Green Finance & TCFD Climate Panel...")
+    logger.info("Generating Dataset 2: UK Green Finance & TCFD Climate Panel...")
     df_uk = generate_uk_green_finance_dataset(n_firms=800, seed=101)
     parquet_path = os.path.join(out_dir, "uk_tcfd_green_finance_panel.parquet")
     df_uk.to_parquet(parquet_path, index=False)
-    print(f"Saved Dataset 2 with {len(df_uk)} firm-year observations across {df_uk['firm_id'].nunique()} UK firms to {parquet_path}")
-    print(f"Years covered: {sorted(df_uk['year'].unique())}")
+    logger.info(f"Saved Dataset 2 with {len(df_uk)} firm-year observations across {df_uk['firm_id'].nunique()} UK firms to {parquet_path}")
+    logger.info(f"Years covered: {sorted(df_uk['year'].unique())}")

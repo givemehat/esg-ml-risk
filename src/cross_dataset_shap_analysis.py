@@ -16,6 +16,9 @@ import lightgbm as lgb
 import shap
 import matplotlib.pyplot as plt
 import seaborn as sns
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 class CrossDatasetEmpiricalAnalyzer:
     """
@@ -190,15 +193,15 @@ if __name__ == "__main__":
     # Plot Figure 13
     fig13_path = os.path.join(figures_dir, "figure13_comparative_shap_attributions.png")
     plot_figure13_comparative_shap(imp_d1, imp_d2, fig13_path)
-    print(f"Generated Figure 13: {fig13_path}")
+    logger.info(f"Generated Figure 13: {fig13_path}")
 
     # 3. Cross-Market Harmonization & Pooling
-    print("\nHarmonizing variables and building pooled dataset (17,600 observations)...")
+    logger.info("\nHarmonizing variables and building pooled dataset (17,600 observations)...")
     h1, h2, h_combined = analyzer.harmonize_datasets(df1, df2)
 
     harm_parquet_path = os.path.join(base_dir, "data", "processed", "harmonized_pooled_panel.parquet")
     h_combined.to_parquet(harm_parquet_path, index=False)
-    print(f"Saved harmonized pooled panel ({len(h_combined)} rows) to {harm_parquet_path}")
+    logger.info(f"Saved harmonized pooled panel ({len(h_combined)} rows) to {harm_parquet_path}")
 
     # 4. Domain Transfer Evaluation (Train on D1, Test on D2, Train on Combined, etc.)
     harm_feats = ["harm_scale", "harm_leverage", "harm_financial_health", "harm_esg_score", "harm_discrepancy"]
@@ -245,16 +248,16 @@ if __name__ == "__main__":
     }
 
     transfer_df = pd.DataFrame(transfer_results).T
-    print("\n--- CROSS-DOMAIN TRANSFER ROC-AUC MATRIX ---")
-    print(transfer_df)
+    logger.info("\n--- CROSS-DOMAIN TRANSFER ROC-AUC MATRIX ---")
+    logger.info(transfer_df)
 
     # Plot Figure 14
     fig14_path = os.path.join(figures_dir, "figure14_harmonized_pooled_domain_transfer.png")
     plot_figure14_domain_transfer(transfer_df, fig14_path)
-    print(f"Generated Figure 14: {fig14_path}")
+    logger.info(f"Generated Figure 14: {fig14_path}")
 
     # Save metrics
     metrics_path = os.path.join(metrics_dir, "cross_dataset_harmonized_results.json")
     with open(metrics_path, "w") as f:
         json.dump(transfer_results, f, indent=4)
-    print(f"Saved cross-dataset metrics to {metrics_path}")
+    logger.info(f"Saved cross-dataset metrics to {metrics_path}")

@@ -29,13 +29,16 @@ from src.visualize import (
     plot_uncertainty_intervals, plot_shap_summary,
     plot_greenwashing_matrix, plot_distress_incremental_roc
 )
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 def main():
-    print("=" * 80)
-    print("STARTING ESG MACHINE LEARNING & FINANCIAL RISK RESEARCH PIPELINE")
-    print("Sapienza University of Rome & Gautam Buddha University")
-    print("Meeting Date: 20 November 2026 | Guide: Prof. Valentina Lagasio")
-    print("=" * 80)
+    logger.info("=" * 80)
+    logger.info("STARTING ESG MACHINE LEARNING & FINANCIAL RISK RESEARCH PIPELINE")
+    logger.info("Sapienza University of Rome & Gautam Buddha University")
+    logger.info("Meeting Date: 20 November 2026 | Guide: Prof. Valentina Lagasio")
+    logger.info("=" * 80)
 
     # 1. Paths & Directories
     data_dir = os.path.join(BASE_DIR, "data", "processed")
@@ -46,23 +49,23 @@ def main():
     os.makedirs(figures_dir, exist_ok=True)
 
     # 1. Flowchart
-    print("\n[Step 1/8] Generating Research Architecture Flowchart (Figure 1)...")
+    logger.info("\n[Step 1/8] Generating Research Architecture Flowchart (Figure 1)...")
     generate_pipeline_flowchart(os.path.join(figures_dir, "figure1_research_architecture_flowchart.png"))
 
     # 2. Paths & Directories
     data_path = os.path.join(data_dir, "esg_financial_panel.parquet")
     if not os.path.exists(data_path):
-        print("\n[Step 2/8] Generating synthetic multi-agency ESG panel dataset...")
+        logger.info("\n[Step 2/8] Generating synthetic multi-agency ESG panel dataset...")
         df = generate_esg_financial_dataset(n_firms=1500, seed=42)
         df.to_parquet(data_path, index=False)
     else:
-        print(f"\n[Step 2/8] Loading existing panel dataset from {data_path}...")
+        logger.info(f"\n[Step 2/8] Loading existing panel dataset from {data_path}...")
         df = pd.read_parquet(data_path)
 
-    print(f"Total Observations: {len(df)} across {df['firm_id'].nunique()} firms and {df['year'].nunique()} years (2018-2025).")
+    logger.info(f"Total Observations: {len(df)} across {df['firm_id'].nunique()} firms and {df['year'].nunique()} years (2018-2025).")
 
     # 2. NLP & Greenwashing Analysis
-    print("\n[Step 3/8] Running NLP Greenwashing & Linguistic Analysis (Theme C)...")
+    logger.info("\n[Step 3/8] Running NLP Greenwashing & Linguistic Analysis (Theme C)...")
     nlp_analyzer = ESGGreenwashingAnalyzer()
     text_features = nlp_analyzer.extract_text_features(df["csr_disclosure"].tolist())
     df["vague_density"] = text_features["vague_density"]
@@ -73,10 +76,10 @@ def main():
     rq4_correlations = nlp_analyzer.test_greenwashing_disagreement_correlation(df)
     with open(os.path.join(metrics_dir, "rq4_greenwash_disagreement_corr.json"), "w") as f:
         json.dump(rq4_correlations, f, indent=4)
-    print(f"  -> RQ4 Disagreement Correlation: Pearson r = {rq4_correlations['pearson_corr']:.4f} (p={rq4_correlations['pearson_pvalue']:.4e})")
+    logger.info(f"  -> RQ4 Disagreement Correlation: Pearson r = {rq4_correlations['pearson_corr']:.4f} (p={rq4_correlations['pearson_pvalue']:.4e})")
 
     # Run Transformer Contextual Benchmark
-    print("  -> Benchmarking Transformer Self-Attention vs TF-IDF for Greenwash Detection (Figure 8)...")
+    logger.info("  -> Benchmarking Transformer Self-Attention vs TF-IDF for Greenwash Detection (Figure 8)...")
     gw_labels = (df["greenwashing_gap"] > 0.20).astype(int).values
     train_idx = np.where(df["year"] <= 2022)[0]
     test_idx = np.where(df["year"] > 2022)[0]
@@ -86,18 +89,18 @@ def main():
     plot_transformer_comparison(m_tfidf, m_tf, embeddings, gw_labels, os.path.join(figures_dir, "figure8_transformer_nlp_greenwash.png"))
 
     # Plot Figure 2 (Rating Divergence) & Figure 6 (Greenwashing Matrix)
-    print("  -> Generating Figure 2 (Rating Divergence) and Figure 6 (Greenwashing Matrix)...")
+    logger.info("  -> Generating Figure 2 (Rating Divergence) and Figure 6 (Greenwashing Matrix)...")
     plot_rating_divergence(df, os.path.join(figures_dir, "figure2_rating_divergence.png"))
     plot_greenwashing_matrix(df, os.path.join(figures_dir, "figure6_greenwashing_matrix.png"))
 
     # 3. Strict Out-of-Time Temporal Split (Raza et al. 2026)
-    print("\n[Step 4/8] Creating strict out-of-time temporal split (Train: 2018-2022, Test: 2023-2025)...")
+    logger.info("\n[Step 4/8] Creating strict out-of-time temporal split (Train: 2018-2022, Test: 2023-2025)...")
     train_df, test_df = get_temporal_splits(df, train_end_year=2022)
-    print(f"  -> Training sample: {len(train_df)} firm-years (2018-2022)")
-    print(f"  -> Out-of-time test sample: {len(test_df)} firm-years (2023-2025)")
+    logger.info(f"  -> Training sample: {len(train_df)} firm-years (2018-2022)")
+    logger.info(f"  -> Out-of-time test sample: {len(test_df)} firm-years (2023-2025)")
 
     # 4. Tabular Benchmark Suite (Ridge, RF, Extra Trees, XGBoost, LightGBM)
-    print("\n[Step 5/8] Training tabular ML models on ESG Score Prediction and Distress Classification...")
+    logger.info("\n[Step 5/8] Training tabular ML models on ESG Score Prediction and Distress Classification...")
     tabular_suite = TabularESGModelSuite(random_state=42)
     
     # Task A: Consensus ESG Score Prediction
@@ -106,8 +109,8 @@ def main():
         train_df, test_df, features=all_features_reg, target_col="consensus_esg"
     )
     reg_metrics.to_csv(os.path.join(metrics_dir, "tabular_regression_benchmarks.csv"), index=False)
-    print("\n  Tabular ESG Score Prediction Benchmark (Test: 2023-2025):")
-    print(reg_metrics.to_string(index=False))
+    logger.info("\n  Tabular ESG Score Prediction Benchmark (Test: 2023-2025):")
+    logger.info(reg_metrics.to_string(index=False))
 
     # Task B: Out-of-Time Financial Distress Prediction
     clf_features = FEATURE_COLS_FINANCIAL + ["consensus_esg", "esg_disagreement"]
@@ -115,13 +118,13 @@ def main():
         train_df, test_df, features=clf_features, target_col="financial_distress_t1"
     )
     clf_metrics.to_csv(os.path.join(metrics_dir, "tabular_classification_benchmarks.csv"), index=False)
-    print("\n  Tabular Financial Distress Classification Benchmark (Test: 2023-2025):")
-    print(clf_metrics.to_string(index=False))
+    logger.info("\n  Tabular Financial Distress Classification Benchmark (Test: 2023-2025):")
+    logger.info(clf_metrics.to_string(index=False))
 
     plot_model_benchmarks(reg_metrics, clf_metrics, os.path.join(figures_dir, "figure3_model_benchmarks.png"))
 
     # 5. Uncertainty Quantification & Conformal Prediction (Theme A, RQ1)
-    print("\n[Step 6/8] Quantifying ESG Prediction Uncertainty (Quantile Regression & Conformal Intervals)...")
+    logger.info("\n[Step 6/8] Quantifying ESG Prediction Uncertainty (Quantile Regression & Conformal Intervals)...")
     uncertainty_suite = ESGUncertaintyEstimator(random_state=42)
     
     # Calibration set: year 2022; Core train: 2018-2021
@@ -146,8 +149,8 @@ def main():
     }
     with open(os.path.join(metrics_dir, "rq1_uncertainty_quantification.json"), "w") as f:
         json.dump(uncertainty_results, f, indent=4)
-    print(f"  -> Quantile Interval (80% target): PICP = {q_eval['PICP (Coverage)']*100:.2f}%, MPIW = {q_eval['MPIW (Mean Width)']:.2f}")
-    print(f"  -> Conformal Interval (90% target): PICP = {c_eval['PICP (Coverage)']*100:.2f}%, MPIW = {c_eval['MPIW (Mean Width)']:.2f}")
+    logger.info(f"  -> Quantile Interval (80% target): PICP = {q_eval['PICP (Coverage)']*100:.2f}%, MPIW = {q_eval['MPIW (Mean Width)']:.2f}")
+    logger.info(f"  -> Conformal Interval (90% target): PICP = {c_eval['PICP (Coverage)']*100:.2f}%, MPIW = {c_eval['MPIW (Mean Width)']:.2f}")
 
     plot_uncertainty_intervals(
         test_df["consensus_esg"].values, q_med, q_low, q_high,
@@ -155,7 +158,7 @@ def main():
     )
 
     # 6. TreeSHAP & Temporal Attribution Stability (Theme A, RQ7)
-    print("\n[Step 7/8] Computing TreeSHAP Values and Temporal Stability across Time Windows...")
+    logger.info("\n[Step 7/8] Computing TreeSHAP Values and Temporal Stability across Time Windows...")
     xgb_reg = tabular_suite.models_reg["XGBoost"]
     explainability_suite = ESGExplainabilitySuite(xgb_reg, all_features_reg)
     shap_matrix, global_importance = explainability_suite.compute_shap_values(test_df[all_features_reg])
@@ -176,31 +179,31 @@ def main():
     stability_metrics = ESGExplainabilitySuite.evaluate_temporal_stability(imp_win1, imp_win2)
     with open(os.path.join(metrics_dir, "rq7_shap_temporal_stability.json"), "w") as f:
         json.dump(stability_metrics, f, indent=4)
-    print(f"  -> SHAP Temporal Stability: Spearman Rank Corr = {stability_metrics['spearman_rank_stability']:.4f}, Cosine Sim = {stability_metrics['cosine_similarity']:.4f}")
+    logger.info(f"  -> SHAP Temporal Stability: Spearman Rank Corr = {stability_metrics['spearman_rank_stability']:.4f}, Cosine Sim = {stability_metrics['cosine_similarity']:.4f}")
 
     merged_stability_df = pd.merge(imp_win1, imp_win2, on="feature", suffixes=("_win1", "_win2"))
     plot_shap_summary(global_importance, merged_stability_df, os.path.join(figures_dir, "figure5_shap_stability.png"))
 
     # 7. Financial Distress Incremental Information (Theme B, RQ2, RQ5, RQ6)
-    print("\n[Step 8/8] Evaluating Incremental Predictive Value on Financial Distress (M1 to M5)...")
+    logger.info("\n[Step 8/8] Evaluating Incremental Predictive Value on Financial Distress (M1 to M5)...")
     distress_evaluator = FinancialDistressEvaluator(random_state=42)
     incremental_results, distress_probs = distress_evaluator.run_incremental_comparison(
         train_df, test_df, model_type="lightgbm", target_col="financial_distress_t1"
     )
     incremental_results.to_csv(os.path.join(metrics_dir, "incremental_distress_specifications.csv"), index=False)
-    print("\n  Incremental Specification Results on Out-of-Time Test Set (2023-2025):")
-    print(incremental_results.to_string(index=False))
+    logger.info("\n  Incremental Specification Results on Out-of-Time Test Set (2023-2025):")
+    logger.info(incremental_results.to_string(index=False))
 
     plot_distress_incremental_roc(
         test_df["financial_distress_t1"].values, distress_probs,
         os.path.join(figures_dir, "figure7_distress_incremental_roc.png")
     )
 
-    print("\n" + "=" * 80)
-    print("ALL EXPERIMENTS COMPLETED SUCCESSFULLY!")
-    print(f"Metrics saved to: {metrics_dir}")
-    print(f"Figures saved to: {figures_dir}")
-    print("=" * 80)
+    logger.info("\n" + "=" * 80)
+    logger.info("ALL EXPERIMENTS COMPLETED SUCCESSFULLY!")
+    logger.info(f"Metrics saved to: {metrics_dir}")
+    logger.info(f"Figures saved to: {figures_dir}")
+    logger.info("=" * 80)
 
 if __name__ == "__main__":
     main()
