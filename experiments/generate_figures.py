@@ -18,9 +18,12 @@ from src.visualize import (
     plot_uncertainty_intervals, plot_shap_summary,
     plot_greenwashing_matrix, plot_distress_incremental_roc
 )
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 def main():
-    print("Generating publication figures (300 DPI)...")
+    logger.info("Generating publication figures (300 DPI)...")
     figures_dir = os.path.join(BASE_DIR, "outputs", "figures")
     metrics_dir = os.path.join(BASE_DIR, "outputs", "metrics")
     data_dir = os.path.join(BASE_DIR, "data", "processed")
@@ -28,18 +31,18 @@ def main():
 
     data_path = os.path.join(data_dir, "esg_financial_panel.parquet")
     if not os.path.exists(data_path):
-        print("Data panel not found. Please run experiments/run_all.py first.")
+        logger.info("Data panel not found. Please run experiments/run_all.py first.")
         return
 
     df = pd.read_parquet(data_path)
 
     # 1. Flowchart
     generate_pipeline_flowchart(os.path.join(figures_dir, "figure1_research_architecture_flowchart.png"))
-    print("✓ Figure 1 generated.")
+    logger.info("✓ Figure 1 generated.")
 
     # 2. Rating Divergence
     plot_rating_divergence(df, os.path.join(figures_dir, "figure2_rating_divergence.png"))
-    print("✓ Figure 2 generated.")
+    logger.info("✓ Figure 2 generated.")
 
     # 3. Model Benchmarks
     reg_csv = os.path.join(metrics_dir, "tabular_regression_benchmarks.csv")
@@ -48,13 +51,13 @@ def main():
         reg_df = pd.read_csv(reg_csv)
         clf_df = pd.read_csv(clf_csv)
         plot_model_benchmarks(reg_df, clf_df, os.path.join(figures_dir, "figure3_model_benchmarks.png"))
-        print("✓ Figure 3 generated.")
+        logger.info("✓ Figure 3 generated.")
 
     # 6. Greenwashing Matrix
     plot_greenwashing_matrix(df, os.path.join(figures_dir, "figure6_greenwashing_matrix.png"))
-    print("✓ Figure 6 generated.")
+    logger.info("✓ Figure 6 generated.")
 
-    print("\nAll available figures successfully created in outputs/figures/")
+    logger.info("\nAll available figures successfully created in outputs/figures/")
 
 if __name__ == "__main__":
     main()

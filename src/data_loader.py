@@ -8,6 +8,9 @@ import os
 import numpy as np
 import pandas as pd
 from typing import Tuple, Dict
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 def generate_esg_financial_dataset(
     n_firms: int = 1500,
@@ -213,11 +216,11 @@ def get_temporal_splits(
 if __name__ == "__main__":
     out_dir = os.path.join(os.path.dirname(__file__), "..", "data", "processed")
     os.makedirs(out_dir, exist_ok=True)
-    print("Generating comprehensive multi-agency ESG and financial distress panel...")
+    logger.info("Generating comprehensive multi-agency ESG and financial distress panel...")
     df = generate_esg_financial_dataset(n_firms=1500, seed=42)
     csv_path = os.path.join(out_dir, "esg_financial_panel.parquet")
     df.to_parquet(csv_path, index=False)
-    print(f"Saved {len(df)} firm-year observations across {df['firm_id'].nunique()} firms to {csv_path}")
+    logger.info(f"Saved {len(df)} firm-year observations across {df['firm_id'].nunique()} firms to {csv_path}")
     train_df, test_df = get_temporal_splits(df)
-    print(f"Train set (2018-2022): {len(train_df)} rows")
-    print(f"Test set (2023-2025): {len(test_df)} rows")
+    logger.info(f"Train set (2018-2022): {len(train_df)} rows")
+    logger.info(f"Test set (2023-2025): {len(test_df)} rows")

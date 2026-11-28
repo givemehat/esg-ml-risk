@@ -28,6 +28,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import roc_auc_score, f1_score, accuracy_score
 import matplotlib.pyplot as plt
 import seaborn as sns
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model: int, max_len: int = 128):
@@ -126,7 +129,7 @@ def compare_transformer_vs_tfidf(
     }
 
     # 2. Transformer Contextual Embeddings
-    print("Fitting tokenizer and running Transformer Multi-Head Self-Attention...")
+    logger.info("Fitting tokenizer and running Transformer Multi-Head Self-Attention...")
     tokenizer = SimpleTokenizer(max_vocab=2000)
     tokenizer.fit(texts)
     input_ids, masks = tokenizer.encode(texts, max_len=64)
@@ -230,9 +233,9 @@ if __name__ == "__main__":
 
     m_tfidf, m_tf, embeddings = compare_transformer_vs_tfidf(texts, labels, train_idx, test_idx)
 
-    print("\n--- NLP BENCHMARK RESULTS ---")
-    print(f"TF-IDF:      {m_tfidf}")
-    print(f"Transformer: {m_tf}")
+    logger.info("\n--- NLP BENCHMARK RESULTS ---")
+    logger.info(f"TF-IDF:      {m_tfidf}")
+    logger.info(f"Transformer: {m_tf}")
 
     out_metrics = {
         "TF_IDF_Baseline": m_tfidf,
@@ -244,4 +247,4 @@ if __name__ == "__main__":
 
     fig_path = os.path.join(os.path.dirname(__file__), "..", "outputs", "figures", "figure8_transformer_nlp_greenwash.png")
     plot_transformer_comparison(m_tfidf, m_tf, embeddings, labels, fig_path)
-    print(f"Saved Figure 8 to {fig_path}")
+    logger.info(f"Saved Figure 8 to {fig_path}")

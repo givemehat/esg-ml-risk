@@ -15,6 +15,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, f1_score, accuracy_score, precision_recall_curve, auc
 import matplotlib.pyplot as plt
 import seaborn as sns
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 class ESGTransformerDeploymentEngine:
     """
@@ -334,7 +337,7 @@ if __name__ == "__main__":
     df = pd.read_parquet(data_path)
     engine = ESGTransformerDeploymentEngine()
 
-    print("Computing Reporting Discrepancy Index (RDI) and FLS Vagueness...")
+    logger.info("Computing Reporting Discrepancy Index (RDI) and FLS Vagueness...")
     df["rdi_score"] = engine.compute_reporting_discrepancy_index(df)
     vague_fls, concrete_fls = engine.classify_forward_looking_vagueness(df["csr_disclosure"].tolist())
     df["fls_vagueness"] = vague_fls
@@ -344,8 +347,8 @@ if __name__ == "__main__":
     test_idx = np.where(df["year"] > 2022)[0]
 
     benchmark_df = engine.evaluate_multi_model_esg_washing(df, train_idx, test_idx)
-    print("\n--- CORPORATE ESG-WASHING DETECTION BENCHMARKS ---")
-    print(benchmark_df.to_string(index=False))
+    logger.info("\n--- CORPORATE ESG-WASHING DETECTION BENCHMARKS ---")
+    logger.info(benchmark_df.to_string(index=False))
 
     # Save metrics
     benchmark_df.to_csv(os.path.join(metrics_dir, "greenwashing_nlp_architectures_benchmark.csv"), index=False)
@@ -354,11 +357,11 @@ if __name__ == "__main__":
     fig9_path = os.path.join(figures_dir, "figure9_transformer_esg_washing_deployment.png")
     fig10_path = os.path.join(figures_dir, "figure10_discrepancy_empirical_benchmark.png")
     
-    print("\nGenerating Figure 9 (Deployment Architecture Flowchart)...")
+    logger.info("\nGenerating Figure 9 (Deployment Architecture Flowchart)...")
     plot_figure9_deployment_architecture(fig9_path)
-    print("Generating Figure 10 (Simulated Discrepancy Curves & Proxy Benchmark)...")
+    logger.info("Generating Figure 10 (Simulated Discrepancy Curves & Proxy Benchmark)...")
     plot_figure10_discrepancy_empirical_benchmark(df, benchmark_df, fig10_path)
 
     # Also save enriched parquet
     df.to_parquet(data_path, index=False)
-    print("All tasks completed successfully!")
+    logger.info("All tasks completed successfully!")

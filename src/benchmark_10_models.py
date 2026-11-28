@@ -28,6 +28,9 @@ import xgboost as xgb
 import lightgbm as lgb
 import matplotlib.pyplot as plt
 import seaborn as sns
+import logging
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(name)s: %(message)s')
 
 class ComprehensiveTenModelBenchmarkSuite:
     """
@@ -401,10 +404,10 @@ if __name__ == "__main__":
 
     suite = ComprehensiveTenModelBenchmarkSuite(random_state=42)
 
-    print("Running 12-Model Benchmarks on Dataset 1 (Global Panel)...")
+    logger.info("Running 12-Model Benchmarks on Dataset 1 (Global Panel)...")
     reg_df1, clf_df1 = suite.run_benchmark_on_dataset1(df1)
     
-    print("Running 12-Model Benchmarks on Dataset 2 (UK Green Finance Panel)...")
+    logger.info("Running 12-Model Benchmarks on Dataset 2 (UK Green Finance Panel)...")
     reg_df2, clf_df2 = suite.run_benchmark_on_dataset2(df2)
 
     # Combine metrics
@@ -414,20 +417,20 @@ if __name__ == "__main__":
     all_reg.to_csv(os.path.join(metrics_dir, "cross_dataset_regression_benchmarks.csv"), index=False)
     all_clf.to_csv(os.path.join(metrics_dir, "cross_dataset_classification_benchmarks.csv"), index=False)
 
-    print("\n--- COMBINED REGRESSION BENCHMARK ---")
-    print(all_reg.to_string(index=False))
+    logger.info("\n--- COMBINED REGRESSION BENCHMARK ---")
+    logger.info(all_reg.to_string(index=False))
 
-    print("\n--- COMBINED CLASSIFICATION BENCHMARK ---")
-    print(all_clf.to_string(index=False))
+    logger.info("\n--- COMBINED CLASSIFICATION BENCHMARK ---")
+    logger.info(all_clf.to_string(index=False))
 
-    print("\nGenerating Figure 11 (Cross-Dataset Multi-Model Benchmarks)...")
+    logger.info("\nGenerating Figure 11 (Cross-Dataset Multi-Model Benchmarks)...")
     plot_figure11_cross_dataset_comparison(
         reg_df1, reg_df2, clf_df1, clf_df2,
         os.path.join(figures_dir, "figure11_cross_dataset_multi_model_benchmark.png")
     )
 
-    print("Generating Figure 12 (Literature Taxonomy Matrix)...")
+    logger.info("Generating Figure 12 (Literature Taxonomy Matrix)...")
     plot_figure12_literature_taxonomy(
         os.path.join(figures_dir, "figure12_literature_taxonomy_matrix.png")
     )
-    print("All multi-model benchmarks completed!")
+    logger.info("All multi-model benchmarks completed!")
